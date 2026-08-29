@@ -614,3 +614,31 @@ export default function LandingPage() {
 
             </div>
           </div>
+
+          <div className="shell hero-status reveal" data-delay="900">
+            <span>Shipping since 2026</span>
+            <span className="hero-status-center">Remote-first, worldwide</span>
+            <span style={{ display: "inline-flex", gap: "0.5rem", alignItems: "center" }}>
+              Scroll to explore <span>↓</span>
+            </span>
+          </div>
+        </section>
+
+        {/* ── About ───────────────────────────────────── */}
+        <section id="about" className="about">
+          <div className="shell about-grid">
+            <div className="about-icon-block">
+              <div className="about-big-icon"><ZenIcon /></div>
+              <div className="reveal eyebrow light" style={{ position: "relative" }}>
+                <span className="eyebrow-dot" style={{ background: "rgba(17,17,17,.5)" }} />
+                The Platform
+              </div>
+              <div className="reveal" data-delay="100" style={{ position: "relative", display: "flex", alignItems: "center", gap: "0.75rem", fontSize: "0.875rem", color: "rgba(17,17,17,.7)", marginTop: "auto", paddingTop: "2rem" }}>
+                <span style={{ fontSize: "1.5rem", color: "#111" }}><ZenIcon /></span>
+                <span style={{ maxWidth: "14rem" }}>Helping developers stay productive across every time zone.</span>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
+              <h2 className="about-h2">
+                <WordReveal text="We help developers break down complexity, stay focused, and " />
