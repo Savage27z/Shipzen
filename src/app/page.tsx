@@ -362,3 +362,31 @@ export default function LandingPage() {
         ctx!.save();
         ctx!.drawImage(maskCanvas, 0, 0);
         ctx!.globalCompositeOperation = "source-in";
+        ctx!.drawImage(revealImg, 0, 0, w, h);
+        ctx!.restore();
+      }
+      raf = requestAnimationFrame(draw);
+    }
+
+    resize();
+
+    // Load the reveal image
+    const img = new Image();
+    img.src = "/hero/reveal.jpg";
+    img.onload = () => { revealImg = img; };
+
+    draw();
+    window.addEventListener("resize", resize);
+    heroSection.addEventListener("mousemove", onMouseMove);
+    heroSection.addEventListener("mouseleave", onMouseLeave);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", resize);
+      heroSection.removeEventListener("mousemove", onMouseMove);
+      heroSection.removeEventListener("mouseleave", onMouseLeave);
+    };
+  }, []);
+
+  // ── Hero card carousel ────────────────────────────────
+  useEffect(() => {
