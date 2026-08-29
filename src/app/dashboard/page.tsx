@@ -34,3 +34,21 @@ function useTimer(settings: TimerSettings, onComplete: (s: WorkSession) => void)
     setMode(next); setSecondsLeft(next === "work" ? settings.workMinutes * 60 : settings.breakMinutes * 60);
     setStatus("idle"); setSessionStart(null);
   }, [sessionStart, mode, onComplete, settings]);
+
+  useEffect(() => {
+    if (status !== "running") return;
+    const id = setInterval(() => setSecondsLeft(p => { if (p <= 1) { complete(); return 0; } return p - 1; }), 1000);
+    return () => clearInterval(id);
+  }, [status, complete]);
+
+  useEffect(() => { if (status === "idle") setSecondsLeft(mode === "work" ? settings.workMinutes * 60 : settings.breakMinutes * 60); }, [settings, mode, status]);
+
+  return {
+    mode, status, secondsLeft, progress, fmt,
+    setMode: (m: TimerMode) => { if (status === "idle") { setMode(m); setSecondsLeft(m === "work" ? settings.workMinutes * 60 : settings.breakMinutes * 60); } },
+    start: () => { setStatus("running"); if (!sessionStart) setSessionStart(Date.now()); },
+    pause: () => setStatus("paused"),
+    reset: () => { setStatus("idle"); setSecondsLeft(mode === "work" ? settings.workMinutes * 60 : settings.breakMinutes * 60); setSessionStart(null); },
+    skip: complete,
+  };
+}
