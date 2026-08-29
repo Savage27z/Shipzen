@@ -27,3 +27,32 @@ img{ display:block }
   --subtle:#b6b6b6;
   --line:#e6e5e2;
   --surface:#f1f0ee;
+  --surface-2:#e3e2df;
+  --accent:#10b981;
+  --accent-from:#34d399;
+  --accent-to:#059669;
+  --hero-bg:#0f1117;
+  --radius-pill:9999px;
+  --radius-card:2rem;
+  --radius-card-sm:1.25rem;
+  --radius-control:0.875rem;
+  --text-watermark:13rem;
+  --font-sans:'Onest',sans-serif;
+  --font-mono:'Geist Mono',monospace;
+}
+
+/* ── Shell ─────────────────────────────────────────────── */
+.shell{ max-width:88rem; margin-inline:auto }
+
+/* ── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar{ width:6px }
+::-webkit-scrollbar-track{ background:transparent }
+::-webkit-scrollbar-thumb{ background:#27272a; border-radius:3px }
+::-webkit-scrollbar-thumb:hover{ background:#3f3f46 }
+
+/* ── Loader ────────────────────────────────────────────── */
+.page-loader{
+  position:fixed; inset:0; z-index:120;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2rem;
+  background:#0a0a0a; color:#fff;
+  border-radius:0 0 2rem 2rem;
