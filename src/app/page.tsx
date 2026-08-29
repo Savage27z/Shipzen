@@ -558,3 +558,31 @@ export default function LandingPage() {
                     <span style={{ color: "#059669" }}>burning out.</span>
                   </span>
                 </span>
+              </h1>
+
+              <div className="reveal rating-row" data-delay="650">
+                <span className="rating-stars">
+                  {[...Array(5)].map((_, i) => <StarIcon key={i} />)}
+                </span>
+                <span className="rating-text">Loved by 500+ developers</span>
+              </div>
+
+              <div className="reveal" data-delay="750" style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
+                <Link href="/dashboard" className="pill-btn">
+                  <span className="pill-inner light with-arrow">
+                    Open Dashboard
+                    <span className="pill-arrow arrow-right"><ArrowRight /></span>
+                  </span>
+                </Link>
+                <button className="pill-btn" onClick={() => scrollToEl("works")}>
+                  <span className="pill-inner outline no-arrow">
+                    See Features
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <div className="hero-right">
+              <div className="reveal scale-in hero-card" data-delay="400">
+                <div className="hero-card-row" onClick={() => setHeroCardIdx((i) => (i + 1) % HERO_CARDS.length)}>
+                  <div className="hero-card-tile">
