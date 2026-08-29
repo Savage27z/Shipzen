@@ -642,3 +642,31 @@ export default function LandingPage() {
             <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
               <h2 className="about-h2">
                 <WordReveal text="We help developers break down complexity, stay focused, and " />
+                <WordReveal text="ship healthy — powered by AI that actually cares about your wellbeing." muted />
+              </h2>
+
+              <div className="reveal about-footer" data-delay="200">
+                <div>
+                  <div style={{ fontSize: "0.875rem", color: "rgba(17,17,17,.45)", marginBottom: "0.5rem" }}>Find us online</div>
+                  <div className="social-chips">
+                    <button className="social-chip accent" title="Twitter"><XIcon /></button>
+                    <button className="social-chip surface" title="GitHub"><CircleDot /></button>
+                    <button className="social-chip surface" title="Discord"><CircleDot /></button>
+                  </div>
+                </div>
+                <button className="pill-btn" onClick={() => scrollToEl("about")}>
+                  <span className="pill-inner outline-dark with-arrow">
+                    Learn More
+                    <span className="pill-arrow arrow-right"><ArrowRight /></span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Create Band ─────────────────────────────── */}
+        <section className="create-band">
+          <ul className="shell create-band-list">
+            {[
+              { word: "Ship", variant: "tile-light" },
