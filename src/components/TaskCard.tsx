@@ -21,3 +21,27 @@ export default function TaskCard({ task, onToggle }: TaskCardProps) {
           task.completed
             ? "bg-emerald-500 border-emerald-500"
             : "border-gray-300 hover:border-emerald-500/60 group-hover:border-gray-400"
+        }`}
+      >
+        {task.completed && (
+          <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        )}
+      </button>
+      <div className="flex-1 min-w-0">
+        <p className={`text-sm font-medium transition-all ${task.completed ? "line-through text-gray-400" : "text-gray-700"}`}>
+          {task.title}
+        </p>
+        <p className="text-xs text-gray-400 mt-0.5">{task.description}</p>
+      </div>
+      <span
+        className={`text-xs px-2 py-0.5 rounded-full flex-shrink-0 font-medium ${
+          task.completed ? "bg-emerald-50 text-emerald-400" : "bg-gray-100 text-gray-400"
+        }`}
+      >
+        {task.estimatedMinutes}m
+      </span>
+    </div>
+  );
+}
