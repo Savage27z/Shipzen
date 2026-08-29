@@ -232,3 +232,21 @@ export default function DashboardPage() {
                   </div>
                 ))}
               </div>
+
+              {/* Timer + Right Panel */}
+              <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: 24, marginBottom: 28 }}>
+                {/* Timer */}
+                <div style={{ background: "#fff", borderRadius: 24, padding: "36px 40px", border: "1px solid #ebebeb" }}>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 28 }}>
+                    <h2 style={{ fontSize: 17, fontWeight: 600, margin: 0 }}>Focus Timer</h2>
+                    <div style={{ display: "flex", gap: 0, background: "#f4f4f0", borderRadius: 10, padding: 3 }}>
+                      {(["work", "break"] as TimerMode[]).map(m => (
+                        <button key={m} onClick={() => timer.setMode(m)} style={{
+                          padding: "5px 16px", borderRadius: 8, fontSize: 13, fontWeight: 500, border: "none", cursor: "pointer",
+                          background: timer.mode === m ? "#fff" : "transparent",
+                          color: timer.mode === m ? "#1a1a1a" : "#9a9a90",
+                          boxShadow: timer.mode === m ? "0 1px 4px rgba(0,0,0,0.06)" : "none",
+                          transition: "all 0.2s",
+                        }}>
+                          {m === "work" ? "Focus" : "Break"}
+                        </button>
