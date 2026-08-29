@@ -404,3 +404,32 @@ img{ display:block }
   display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
   gap:1.5rem; border-top:1px solid var(--line); padding-top:1.5rem;
 }
+.social-chips{ display:flex; gap:0.5rem }
+.social-chip{
+  width:2.25rem; height:2.25rem; display:grid; place-items:center;
+  border-radius:9999px; font-size:0.875rem;
+  transition: transform 0.35s cubic-bezier(.2,.8,.2,1);
+}
+.social-chip:hover{ transform:scale(1.18) }
+.social-chip.accent{ background:var(--accent); color:#fff }
+.social-chip.surface{ background:var(--surface); color:rgba(17,17,17,.7) }
+
+/* ── Create Band ───────────────────────────────────────── */
+.create-band{
+  background:#fff;
+}
+.create-band-list{
+  display:flex; flex-direction:column; gap:0.75rem;
+  padding:2.5rem 1.25rem;
+}
+@media(min-width:640px){
+  .create-band-list{ flex-direction:row; gap:1rem; padding-inline:2rem }
+}
+.create-band-item{
+  flex:1;
+  transition: transform 0.35s cubic-bezier(.2,.8,.2,1);
+}
+.create-band-item:hover{ transform:scale(1.03) }
+.create-band-tile{
+  display:grid; place-items:center;
+  height:6rem; border-radius:9999px;
