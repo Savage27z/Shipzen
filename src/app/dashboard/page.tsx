@@ -340,3 +340,21 @@ export default function DashboardPage() {
                     ))}
                   </div>
 
+                  {/* Quick Actions */}
+                  <div style={{ background: "#fff", borderRadius: 24, padding: "24px 28px", border: "1px solid #ebebeb" }}>
+                    <p style={{ fontSize: 14, fontWeight: 600, margin: "0 0 14px" }}>Quick Actions</p>
+                    <button onClick={reqNudge} style={{
+                      width: "100%", padding: "11px 0", borderRadius: 14, fontSize: 14, fontWeight: 600, border: "none", cursor: "pointer",
+                      background: "#2bc4a8", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+                    }}>
+                      <Star className="w-4 h-4" /> Get AI Nudge
+                    </button>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 6, marginTop: 14 }}>
+                      {[
+                        { label: "Browse all tasks", page: "tasks" },
+                        { label: "View session history", page: "history" },
+                        { label: "Timer settings", page: "settings" },
+                      ].map(a => (
+                        <button key={a.page} onClick={() => setActivePage(a.page)} style={{
+                          background: "none", border: "none", cursor: "pointer", textAlign: "left" as const,
+                          fontSize: 13, color: "#9a9a90", padding: "4px 0",
