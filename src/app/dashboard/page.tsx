@@ -358,3 +358,21 @@ export default function DashboardPage() {
                         <button key={a.page} onClick={() => setActivePage(a.page)} style={{
                           background: "none", border: "none", cursor: "pointer", textAlign: "left" as const,
                           fontSize: 13, color: "#9a9a90", padding: "4px 0",
+                        }}>
+                          {a.label} →
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Task Breakdown */}
+              <div style={{ background: "#fff", borderRadius: 24, padding: "28px 32px", border: "1px solid #ebebeb" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+                  <h2 style={{ fontSize: 17, fontWeight: 600, margin: 0 }}>Task Breakdown</h2>
+                  <span style={{ fontSize: 13, color: "#9a9a90" }}>{remBd} AI breakdowns left</span>
+                </div>
+                <TaskList taskGroups={taskGroups} onToggleTask={onToggle} onAddGroup={onAdd} onRemoveGroup={onRemove} remainingBreakdowns={remBd} />
+              </div>
+            </>
