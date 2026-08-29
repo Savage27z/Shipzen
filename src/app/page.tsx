@@ -418,3 +418,31 @@ export default function LandingPage() {
     setModalSuccess(false);
     lenisRef.current?.stop();
     document.documentElement.style.overflow = "hidden";
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+    lenisRef.current?.start();
+    document.documentElement.style.removeProperty("overflow");
+    setTimeout(() => setModalSuccess(false), 300);
+  };
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") { closeMenu(); closeModal(); }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  });
+
+  const navItems = [
+    { label: "Home", id: "home" },
+    { label: "Features", id: "works" },
+    { label: "How It Works", id: "services" },
+    { label: "About", id: "about" },
+    { label: "Dashboard", href: "/dashboard" },
+    { label: "Contact", action: "modal" },
+  ];
+
+  const handleNav = (item: typeof navItems[0]) => {
+    closeMenu();
+    if (item.action === "modal") { setTimeout(openModal, 100); return; }
