@@ -430,3 +430,21 @@ export default function DashboardPage() {
                     <div key={f.key} style={{ marginBottom: 12 }}>
                       <label style={{ fontSize: 13, color: "#9a9a90", display: "block", marginBottom: 6 }}>{f.label}</label>
                       <input type="number" min={f.min} max={f.max} value={f.val}
+                        onChange={e => { const v = Math.max(f.min, Math.min(f.max, parseInt(e.target.value) || f.val)); const ns = { ...timerSettings, [f.key]: v }; setTimerSettingsState(ns); saveTimerSettings(ns); }}
+                        style={{ width: "100%", padding: "10px 14px", borderRadius: 12, fontSize: 14, border: "1px solid #ebebeb", background: "#f8f8f6", color: "#1a1a1a", outline: "none", boxSizing: "border-box" as const }} />
+                    </div>
+                  ))}
+                </div>
+                <div style={{ background: "#fff", borderRadius: 24, padding: "28px 32px", border: "1px solid #ebebeb" }}>
+                  <h3 style={{ fontSize: 15, fontWeight: 600, margin: "0 0 12px" }}>Plan</h3>
+                  <p style={{ fontSize: 14, color: "#9a9a90", margin: 0 }}>{isPro() ? "Pro — Unlimited" : "Free — 3 breakdowns/day"}</p>
+                  {!isPro() && <button style={{ padding: "10px 24px", background: "#2bc4a8", color: "#fff", border: "none", borderRadius: 50, fontSize: 14, fontWeight: 600, cursor: "pointer", marginTop: 12 }}>Upgrade to Pro</button>}
+                </div>
+                <div style={{ background: "#fff", borderRadius: 24, padding: "28px 32px", border: "1px solid #ebebeb" }}>
+                  <h3 style={{ fontSize: 15, fontWeight: 600, margin: "0 0 12px" }}>Data</h3>
+                  <button onClick={() => { if (confirm("Delete all data?")) { localStorage.removeItem("shipzen-state"); window.location.reload(); } }}
+                    style={{ padding: "10px 24px", color: "#e05252", border: "1px solid rgba(224,82,82,0.2)", borderRadius: 50, fontSize: 14, fontWeight: 500, cursor: "pointer", background: "transparent" }}>
+                    Clear All Data
+                  </button>
+                </div>
+              </div>
