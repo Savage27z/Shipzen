@@ -810,3 +810,31 @@ export default function LandingPage() {
             </div>
             <div>
               <div className="footer-col-title">Product</div>
+              <div className="footer-col-links">
+                <button className="footer-link" onClick={() => scrollToEl("works")}>Features</button>
+                <button className="footer-link" onClick={() => scrollToEl("services")}>How It Works</button>
+                <Link href="/dashboard" className="footer-link">Dashboard</Link>
+                <button className="footer-link" onClick={() => scrollToEl("stats-section")}>Stats</button>
+              </div>
+            </div>
+            <div>
+              <div className="footer-col-title">Resources</div>
+              <div className="footer-col-links">
+                <button className="footer-link" onClick={() => scrollToEl("about")}>About</button>
+                <button className="footer-link" onClick={openModal}>Contact</button>
+                <span className="footer-link" style={{ cursor: "default" }}>Changelog</span>
+                <span className="footer-link" style={{ cursor: "default" }}>Blog</span>
+              </div>
+            </div>
+            <div>
+              <div className="footer-col-title">Social</div>
+              <div className="footer-col-links">
+                <span className="footer-link">Twitter / X</span>
+                <span className="footer-link">GitHub</span>
+                <span className="footer-link">Discord</span>
+                <span className="footer-link">LinkedIn</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="footer-legal">
