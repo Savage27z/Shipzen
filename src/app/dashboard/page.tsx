@@ -448,3 +448,12 @@ export default function DashboardPage() {
                   </button>
                 </div>
               </div>
+            </div>
+          )}
+        </div>
+      </main>
+
+      <AINudge nudges={nudges} onDismiss={dismissNudge} />
+    </div>
+  );
+}
