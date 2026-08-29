@@ -586,3 +586,31 @@ export default function LandingPage() {
               <div className="reveal scale-in hero-card" data-delay="400">
                 <div className="hero-card-row" onClick={() => setHeroCardIdx((i) => (i + 1) % HERO_CARDS.length)}>
                   <div className="hero-card-tile">
+                    <LogoMark size="1.875rem" color="#34d399" />
+                  </div>
+                  <div className="hero-card-panel">
+                    <div style={{ position: "relative", minHeight: "3.25rem" }}>
+                      <div className="hero-card-caption">{HERO_CARDS[heroCardIdx].caption}</div>
+                      <div className="hero-card-title">{HERO_CARDS[heroCardIdx].title}</div>
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "0.5rem" }}>
+                      <div className="hero-card-dots">
+                        {HERO_CARDS.map((_, i) => (
+                          <div key={i} className={`hero-card-dot ${i === heroCardIdx ? "active" : "inactive"}`} />
+                        ))}
+                      </div>
+                      <div className="hero-card-nav">
+                        <button onClick={(e) => { e.stopPropagation(); setHeroCardIdx((i) => (i - 1 + HERO_CARDS.length) % HERO_CARDS.length); }}>
+                          <span style={{ transform: "rotate(180deg)", display: "flex" }}><ArrowRight /></span>
+                        </button>
+                        <button onClick={(e) => { e.stopPropagation(); setHeroCardIdx((i) => (i + 1) % HERO_CARDS.length); }}>
+                          <ArrowRight />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
