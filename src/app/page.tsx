@@ -866,3 +866,31 @@ export default function LandingPage() {
                 {item.href ? (
                   <Link href={item.href} className="nav-menu-item"
                     style={{ transitionDelay: menuOpen ? `${i * 45 + 80}ms` : "0ms" }}
+                    onClick={closeMenu}>
+                    <span className="nav-menu-idx">0{i + 1}</span>
+                    <span className="nav-menu-label">{item.label}</span>
+                  </Link>
+                ) : (
+                  <button className="nav-menu-item"
+                    style={{ transitionDelay: menuOpen ? `${i * 45 + 80}ms` : "0ms" }}
+                    onClick={() => handleNav(item)}>
+                    <span className="nav-menu-idx">0{i + 1}</span>
+                    <span className="nav-menu-label">{item.label}</span>
+                  </button>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className="shell nav-menu-bottom">
+          <span>Local time — {clockTime}</span>
+          <button onClick={() => { closeMenu(); setTimeout(openModal, 100); }}>
+            Start shipping →
+          </button>
+        </div>
+      </div>
+
+      {/* ── Request Modal ────────────────────────────────── */}
+      <div className={`modal-backdrop ${modalOpen ? "open" : ""}`} onClick={closeModal} role="dialog" aria-modal="true">
+        <div className="modal-panel" onClick={(e) => e.stopPropagation()}>
+          <button className="modal-close" onClick={closeModal}><XIcon /></button>
