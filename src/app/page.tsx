@@ -306,3 +306,31 @@ export default function LandingPage() {
       if (!maskCtx) return;
       const grad = maskCtx.createRadialGradient(x, y, 0, x, y, BRUSH_RADIUS);
       grad.addColorStop(0, "rgba(255,255,255,1)");
+      grad.addColorStop(0.5, "rgba(255,255,255,0.5)");
+      grad.addColorStop(1, "rgba(255,255,255,0)");
+      maskCtx.fillStyle = grad;
+      maskCtx.fillRect(x - BRUSH_RADIUS, y - BRUSH_RADIUS, BRUSH_RADIUS * 2, BRUSH_RADIUS * 2);
+    }
+
+    // Listen on the hero section so events aren't blocked by higher-z content
+    const heroSection = canvas!.closest("section")!;
+
+    function onMouseMove(e: MouseEvent) {
+      const rect = canvas!.getBoundingClientRect();
+      const dpr = Math.min(devicePixelRatio, 2);
+      mx = (e.clientX - rect.left) * dpr;
+      my = (e.clientY - rect.top) * dpr;
+      hasMoved = true;
+    }
+
+    function onMouseLeave() {
+      mx = -9999; my = -9999;
+      prevMx = mx; prevMy = my;
+      hasMoved = false;
+    }
+
+    function draw() {
+      if (!maskCtx || !maskCanvas) { raf = requestAnimationFrame(draw); return; }
+
+      // Decay the mask (fade existing strokes toward transparent)
+      maskCtx.globalCompositeOperation = "destination-out";
