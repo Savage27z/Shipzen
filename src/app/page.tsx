@@ -110,3 +110,31 @@ const FEATURES = [
     year: "Core",
     title: "AI Nudges",
     description: "Context-aware notifications that celebrate wins and catch you before you overdo it — powered by Claude.",
+    tags: ["Smart Nudges", "Celebrations", "Wellness Tips"],
+  },
+];
+
+const SERVICES = [
+  { title: "Break It Down", desc: "Paste a big task, get shippable pieces in seconds." },
+  { title: "Focus & Ship", desc: "Timer-driven sessions that keep you in the zone." },
+  { title: "Track Wellness", desc: "Burnout risk scoring from your actual work patterns." },
+  { title: "Stay Zen", desc: "AI nudges that help you ship without crashing." },
+];
+
+const STATS = [
+  { value: 500, suffix: "+", label: "Tasks broken down" },
+  { value: 98, suffix: "%", label: "Healthier work patterns" },
+  { value: 25, suffix: "min", label: "Average focus session" },
+  { value: 40, suffix: "%", label: "Less burnout reported" },
+];
+
+/* ── Main Component ─────────────────────────────────────── */
+export default function LandingPage() {
+  const [loaderDone, setLoaderDone] = useState(false);
+  const [loaderExit, setLoaderExit] = useState(false);
+  const [loaderProgress, setLoaderProgress] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalSuccess, setModalSuccess] = useState(false);
+  const [clockTime, setClockTime] = useState("9:41am");
+  const [clockDate, setClockDate] = useState("28 August, 2026");
