@@ -178,3 +178,21 @@ export default function DashboardPage() {
               width: 44, height: 44, borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center",
               background: activePage === n.id ? "#e0f5ef" : "transparent",
               color: activePage === n.id ? "#2bc4a8" : "#b0b0a8",
+              border: "none", cursor: "pointer", transition: "all 0.2s",
+            }}>
+            {n.icon}
+          </button>
+        ))}
+      </aside>
+
+      {/* ── Main ── */}
+      <main style={{ flex: 1, overflowY: "auto" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "36px 44px" }}>
+
+          {activePage === "dashboard" && (
+            <>
+              {/* Header */}
+              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 32 }}>
+                <div>
+                  <h1 style={{ fontSize: 26, fontWeight: 600, margin: 0, lineHeight: 1.2 }}>Ship without burning out</h1>
+                  <p style={{ color: "#9a9a90", fontSize: 14, marginTop: 6 }}>
