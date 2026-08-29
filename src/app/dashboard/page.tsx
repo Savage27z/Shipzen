@@ -214,3 +214,21 @@ export default function DashboardPage() {
                 </div>
               </div>
 
+              {/* Stat Cards */}
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, marginBottom: 28 }}>
+                {statCards.map(s => (
+                  <div key={s.label} style={{
+                    background: s.bg, borderRadius: 20, padding: "28px 28px 20px",
+                    position: "relative", overflow: "hidden",
+                  }}>
+                    <p style={{ fontSize: 13, fontWeight: 500, color: s.color, opacity: 0.7, margin: 0 }}>{s.label}</p>
+                    <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginTop: 8 }}>
+                      <div>
+                        <span style={{ fontSize: 44, fontWeight: 700, color: s.color, lineHeight: 1, letterSpacing: "-0.02em" }}>{s.value}</span>
+                        <span style={{ fontSize: 13, color: s.color, opacity: 0.5, marginLeft: 8 }}>{s.sub}</span>
+                      </div>
+                      <Sparkline color={s.color} seed={s.seed} />
+                    </div>
+                  </div>
+                ))}
+              </div>
