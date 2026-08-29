@@ -52,3 +52,21 @@ function useTimer(settings: TimerSettings, onComplete: (s: WorkSession) => void)
     skip: complete,
   };
 }
+
+/* ── Sparkline ────────────────────────────────────────── */
+function Sparkline({ color, seed = 0 }: { color: string; seed?: number }) {
+  const pts = [40, 35, 45, 30, 50, 38, 55, 42, 60, 48, 65, 52, 58, 62, 55, 68];
+  const shifted = pts.map((p, i) => p + ((seed * 7 + i * 3) % 20) - 10);
+  const h = 40, w = 80;
+  const max = Math.max(...shifted), min = Math.min(...shifted);
+  const points = shifted.map((v, i) => {
+    const x = (i / (shifted.length - 1)) * w;
+    const y = h - ((v - min) / (max - min + 1)) * (h - 4) - 2;
+    return `${x},${y}`;
+  }).join(" ");
+  return (
+    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{ opacity: 0.5 }}>
+      <polyline points={points} fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
