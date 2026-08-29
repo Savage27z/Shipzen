@@ -82,3 +82,31 @@ const PARTNERS = ["React", "Next.js", "TypeScript", "Tailwind", "Claude AI", "Ve
 const FEATURES = [
   {
     image: "/features/breakdown.jpg",
+    category: "AI Engine",
+    year: "Core",
+    title: "Task Breakdown",
+    description: "Paste any big task — Claude AI breaks it into bite-sized, shippable sub-tasks with time estimates.",
+    tags: ["Claude AI", "Smart Parsing", "Time Estimates"],
+  },
+  {
+    image: "/features/timer.jpg",
+    category: "Productivity",
+    year: "Core",
+    title: "Focus Timer",
+    description: "Pomodoro-style timer with work/break tracking and a visual timeline of your entire day.",
+    tags: ["Pomodoro", "Work Timeline", "Session Logs"],
+  },
+  {
+    image: "/features/burnout.jpg",
+    category: "Wellness",
+    year: "Core",
+    title: "Burnout Score",
+    description: "Real-time risk score (0-100) based on long sessions, late nights, skipped breaks, and consecutive work days.",
+    tags: ["Risk Analysis", "Pattern Detection", "Alerts"],
+  },
+  {
+    image: "/features/nudges.jpg",
+    category: "AI Copilot",
+    year: "Core",
+    title: "AI Nudges",
+    description: "Context-aware notifications that celebrate wins and catch you before you overdo it — powered by Claude.",
