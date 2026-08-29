@@ -754,3 +754,31 @@ export default function LandingPage() {
         <section id="stats-section" className="stats">
           <div className="shell stats-outer">
             <div className="reveal scale-in stats-panel">
+              <div className="eyebrow dark">
+                <span className="eyebrow-dot" style={{ background: "rgba(255,255,255,.6)" }} />
+                By the numbers
+              </div>
+              <h2 className="stats-h2">
+                <span className="line-reveal-line">
+                  <span className="line-reveal-inner" data-delay="120">Proof in the work, not the words.</span>
+                </span>
+              </h2>
+              <div className="stats-grid">
+                {STATS.map((stat, i) => (
+                  <div key={stat.label} className="reveal" data-delay={String(i * 90)}>
+                    <div className="stat-number">
+                      {statValues[i]}{stat.suffix}
+                    </div>
+                    <div className="stat-label">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* ── Footer ──────────────────────────────────────── */}
+      <footer className="site-footer">
+        <div className="shell footer-inner">
+          <div className="footer-cta">
