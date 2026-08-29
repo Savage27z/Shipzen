@@ -250,3 +250,31 @@ export default function LandingPage() {
           };
           requestAnimationFrame(animate);
           // keep observing for scroll-driven updates via scroll listener
+          const onScroll = () => {
+            const rect = statsEl.getBoundingClientRect();
+            const vh = window.innerHeight;
+            const progress = Math.min(1, Math.max(0, 1 - rect.top / vh));
+            setStatValues(STATS.map((s) => Math.round(progress * s.value)));
+          };
+          window.addEventListener("scroll", onScroll, { passive: true });
+          return () => window.removeEventListener("scroll", onScroll);
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(statsEl);
+    return () => observer.disconnect();
+  }, [loaderDone]);
+
+  // ── Liquid cursor reveal canvas (Lumora-style) ────────
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const BRUSH_RADIUS = 100;
+    const DECAY = 0.045;
+    let w = 0, h = 0, raf: number;
+    let mx = -9999, my = -9999;
+    let prevMx = mx, prevMy = my;
