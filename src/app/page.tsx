@@ -950,3 +950,18 @@ export default function LandingPage() {
 /* ── Word Reveal sub-component ──────────────────────────── */
 function WordReveal({ text, muted }: { text: string; muted?: boolean }) {
   return (
+    <>
+      {text.split(" ").map((word, i) => (
+        <span key={i} className="word-reveal-word" style={{ marginRight: "0.3em" }}>
+          <span
+            className="word-reveal-inner"
+            data-delay={String(i * 35)}
+            style={{ color: muted ? "#8d8d8d" : undefined }}
+          >
+            {word}
+          </span>
+        </span>
+      ))}
+    </>
+  );
+}
