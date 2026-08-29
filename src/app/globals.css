@@ -491,3 +491,32 @@ img{ display:block }
 }
 .feature-card-img{
   width:100%; height:100%; object-fit:cover; border-radius:inherit;
+  opacity:.55; transition: opacity .4s ease, transform .4s ease;
+}
+.feature-card:hover .feature-card-img{
+  opacity:.75; transform:scale(1.05);
+}
+.feature-card-bottom{
+  position:absolute; inset-inline:1.5rem; bottom:1.5rem;
+}
+@media(min-width:640px){ .feature-card-bottom{ inset-inline:2rem; bottom:2rem } }
+.feature-card-bottom h3{
+  font-size:1.5rem; font-weight:500; letter-spacing:-0.01em;
+}
+@media(min-width:640px){ .feature-card-bottom h3{ font-size:1.875rem } }
+.feature-card-bottom p{
+  margin-top:0.5rem; max-width:28rem; font-size:0.875rem; color:rgba(255,255,255,.55);
+}
+.feature-card-tags{
+  margin-top:1.25rem; display:flex; flex-wrap:wrap; gap:0.5rem;
+}
+.tag-chip{
+  display:inline-flex;
+  border:1px solid rgba(255,255,255,.25); color:#fff;
+  border-radius:9999px; padding:0.5rem 1rem; font-size:0.875rem;
+}
+
+/* ── Services ──────────────────────────────────────────── */
+.services{
+  background:#fff;
+}
