@@ -782,3 +782,31 @@ export default function LandingPage() {
       <footer className="site-footer">
         <div className="shell footer-inner">
           <div className="footer-cta">
+            <h2 className="footer-cta-h2">
+              <span className="line-reveal-line">
+                <span className="line-reveal-inner" data-delay="0">Ready to ship</span>
+              </span>
+              <span className="line-reveal-line">
+                <span className="line-reveal-inner" data-delay="100">smarter? Let&apos;s go.</span>
+              </span>
+            </h2>
+            <Link href="/dashboard" className="pill-btn">
+              <span className="pill-inner light with-arrow">
+                Open Dashboard
+                <span className="pill-arrow arrow-up-right"><ArrowUpRight /></span>
+              </span>
+            </Link>
+          </div>
+
+          <div className="footer-columns">
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "1.125rem", fontWeight: 600, marginBottom: "1rem" }}>
+                <LogoMark size="1.25rem" color="#10b981" />
+                ShipZen
+              </div>
+              <p style={{ maxWidth: "20rem", fontSize: "0.875rem", color: "rgba(255,255,255,.55)" }}>
+                A developer productivity + wellness dashboard that helps you ship without burning out.
+              </p>
+            </div>
+            <div>
+              <div className="footer-col-title">Product</div>
