@@ -106,3 +106,21 @@ export default function DashboardPage() {
     addSession(session); setSessions(getSessions()); setTodaySessions(getTodaySessions());
     recordActivity(); setStreak(getStreak());
     trackEvent("session_completed", { mode: session.mode, duration: session.durationMinutes });
+    reqNudge();
+  }, []);
+
+  const timer = useTimer(timerSettings, onSession);
+
+  const onToggle = useCallback((gid: string, tid: string) => {
+    updateTaskGroup(gid, g => ({ ...g, subTasks: g.subTasks.map(t => t.id === tid ? { ...t, completed: !t.completed, completedAt: !t.completed ? Date.now() : undefined } : t) }));
+    setTaskGroups(getTaskGroups()); recordActivity(); setStreak(getStreak()); trackEvent("task_toggled");
+  }, []);
+
+  const onAdd = useCallback(async (task: string) => {
+    const res = await fetch("/api/breakdown", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ task }) });
+    if (!res.ok) { const d = await res.json(); throw new Error(d.error || "Failed"); }
+    const { subTasks } = await res.json();
+    addTaskGroup({ id: crypto.randomUUID(), originalTask: task, createdAt: Date.now(), subTasks: subTasks.map((s: { title: string; description: string; estimatedMinutes: number }) => ({ id: crypto.randomUUID(), ...s, completed: false })) });
+    incrementBreakdownCount(); setTaskGroups(getTaskGroups());
+  }, []);
+
