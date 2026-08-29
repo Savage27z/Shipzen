@@ -530,3 +530,31 @@ export default function LandingPage() {
         <section id="home" className="hero">
           <div className="hero-bg-wrap">
             {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/hero/base.jpg" alt="" aria-hidden="true" draggable={false} />
+            <canvas ref={canvasRef} className="hero-reveal-canvas" />
+          </div>
+          <div className="hero-vignette" />
+          <div className={`hero-watermark ${loaderDone ? "revealed" : ""}`}>SHIPZEN</div>
+
+          <div className="shell hero-grid">
+            <div className="hero-left">
+              <div className="reveal eyebrow light" data-delay="200">
+                <span className="eyebrow-dot" style={{ background: "rgba(0,0,0,.4)" }} />
+                Developer Productivity
+              </div>
+
+              <h1 className="hero-h1">
+                <span className="line-reveal-line">
+                  <span className="line-reveal-inner" data-delay={loaderDone ? "0" : "9999"}
+                    style={loaderDone ? { transitionDelay: "250ms" } : undefined}
+                    ref={(el) => { if (el && loaderDone) setTimeout(() => el.classList.add("revealed"), 250); }}>
+                    Ship without
+                  </span>
+                </span>
+                <span className="line-reveal-line">
+                  <span className="line-reveal-inner" data-delay={loaderDone ? "0" : "9999"}
+                    style={loaderDone ? { transitionDelay: "370ms" } : undefined}
+                    ref={(el) => { if (el && loaderDone) setTimeout(() => el.classList.add("revealed"), 370); }}>
+                    <span style={{ color: "#059669" }}>burning out.</span>
+                  </span>
+                </span>
