@@ -286,3 +286,21 @@ export default function DashboardPage() {
                       {timer.status === "paused" && (
                         <>
                           <button onClick={timer.start} style={{ padding: "10px 24px", borderRadius: 50, fontSize: 14, fontWeight: 600, border: "none", cursor: "pointer", background: "#2bc4a8", color: "#fff" }}>Resume</button>
+                          <button onClick={timer.reset} style={{ padding: "10px 20px", borderRadius: 50, fontSize: 14, border: "1px solid #ebebeb", cursor: "pointer", background: "transparent", color: "#9a9a90" }}>Reset</button>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Panel */}
+                <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                  {/* Ship Score */}
+                  <div style={{
+                    background: "linear-gradient(135deg, #2bc4a8 0%, #1ea88e 100%)",
+                    borderRadius: 24, padding: "28px 28px 24px", color: "#fff", position: "relative", overflow: "hidden",
+                  }}>
+                    <div style={{ position: "absolute", top: -20, right: -20, width: 120, height: 120, borderRadius: "50%", background: "rgba(255,255,255,0.08)" }} />
+                    <div style={{ position: "absolute", bottom: -30, left: -10, width: 80, height: 80, borderRadius: "50%", background: "rgba(255,255,255,0.05)" }} />
+                    <p style={{ fontSize: 13, fontWeight: 500, margin: 0, opacity: 0.8 }}>Ship Score</p>
+                    <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginTop: 8 }}>
