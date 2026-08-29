@@ -119,17 +119,19 @@ export default function DashboardPage() {
   }, []);
 
   const onAdd = useCallback(async (task: string) => {
+    if (!isAuthenticated) { await tiunLogin(); return; }
     const res = await fetch("/api/breakdown", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ task }) });
     if (!res.ok) { const d = await res.json(); throw new Error(d.error || "Failed"); }
     const { subTasks } = await res.json();
     addTaskGroup({ id: crypto.randomUUID(), originalTask: task, createdAt: Date.now(), subTasks: subTasks.map((s: { title: string; description: string; estimatedMinutes: number }) => ({ id: crypto.randomUUID(), ...s, completed: false })) });
     incrementBreakdownCount(); setTaskGroups(getTaskGroups());
-  }, []);
+  }, [isAuthenticated, tiunLogin]);
 
   const onRemove = useCallback((gid: string) => { removeTaskGroup(gid); setTaskGroups(getTaskGroups()); }, []);
   const dismissNudge = useCallback((id: string) => { setNudges(p => p.filter(n => n.id !== id)); }, []);
 
   const reqNudge = useCallback(async () => {
+    if (!isAuthenticated) { await tiunLogin(); return; }
     try {
       const ctx = getNudgeContext(getSessions(), burnout, ship, getTaskGroups());
       const res = await fetch("/api/nudge", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ context: ctx }) });
@@ -137,7 +139,7 @@ export default function DashboardPage() {
       const n: Nudge = { id: crypto.randomUUID(), message: data.message, type: data.type, timestamp: Date.now() };
       setNudges(p => [...p, n]); setTimeout(() => setNudges(p => p.filter(x => x.id !== n.id)), 15000);
     } catch {}
-  }, [burnout, ship]);
+  }, [isAuthenticated, tiunLogin, burnout, ship]);
 
   const focusCount = todaySessions.filter(s => s.mode === "work").length;
   const focusMins = todaySessions.filter(s => s.mode === "work").reduce((a, s) => a + s.durationMinutes, 0);
