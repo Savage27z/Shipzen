@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { CLAUDE_MODEL, getAnthropicHeaders, NUDGE_SYSTEM_PROMPT } from "@/lib/claude";
+import { AI_MODEL, getOpenRouterHeaders, NUDGE_SYSTEM_PROMPT } from "@/lib/claude";
 
 export async function POST(req: NextRequest) {
   try {
@@ -9,23 +9,20 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Context is required" }, { status: 400 });
     }
 
-    const apiKey = process.env.ANTHROPIC_API_KEY;
+    const apiKey = process.env.OPENROUTER_API_KEY;
     if (!apiKey) {
       return NextResponse.json({ error: "API key not configured" }, { status: 500 });
     }
 
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
-      headers: getAnthropicHeaders(),
+      headers: getOpenRouterHeaders(),
       body: JSON.stringify({
-        model: CLAUDE_MODEL,
+        model: AI_MODEL,
         max_tokens: 256,
-        system: NUDGE_SYSTEM_PROMPT,
         messages: [
-          {
-            role: "user",
-            content: `Based on this developer's current work data, give them a contextual nudge:\n\n${context}`,
-          },
+          { role: "system", content: NUDGE_SYSTEM_PROMPT },
+          { role: "user", content: `Based on this developer's current work data, give them a contextual nudge:\n\n${context}` },
         ],
       }),
     });
@@ -38,13 +35,14 @@ export async function POST(req: NextRequest) {
     }
 
     const data = await response.json();
-    const content = data.content?.[0]?.text;
+    const content = data.choices?.[0]?.message?.content;
 
     if (!content) {
       return NextResponse.json({ error: "Empty response" }, { status: 500 });
     }
 
-    const nudge = JSON.parse(content);
+    const cleaned = content.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
+    const nudge = JSON.parse(cleaned);
     return NextResponse.json(nudge);
   } catch (error) {
     console.error("Nudge error:", error);

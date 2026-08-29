@@ -1,12 +1,14 @@
-// Claude API client helpers — used by API routes only (server-side)
+// AI API client helpers — uses OpenRouter for model access
+// Used by API routes only (server-side)
 
-export const CLAUDE_MODEL = "claude-sonnet-5";
+export const AI_MODEL = "anthropic/claude-sonnet-4";
 
-export function getAnthropicHeaders() {
+export function getOpenRouterHeaders() {
   return {
     "Content-Type": "application/json",
-    "x-api-key": process.env.ANTHROPIC_API_KEY || "",
-    "anthropic-version": "2023-06-01",
+    "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY || ""}`,
+    "HTTP-Referer": "https://shipzen.vercel.app",
+    "X-Title": "ShipZen",
   };
 }
 

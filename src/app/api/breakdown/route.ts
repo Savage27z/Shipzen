@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { CLAUDE_MODEL, getAnthropicHeaders, BREAKDOWN_SYSTEM_PROMPT } from "@/lib/claude";
+import { AI_MODEL, getOpenRouterHeaders, BREAKDOWN_SYSTEM_PROMPT } from "@/lib/claude";
 
 export async function POST(req: NextRequest) {
   try {
@@ -9,30 +9,27 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Task description is required" }, { status: 400 });
     }
 
-    const apiKey = process.env.ANTHROPIC_API_KEY;
+    const apiKey = process.env.OPENROUTER_API_KEY;
     if (!apiKey) {
       return NextResponse.json({ error: "API key not configured" }, { status: 500 });
     }
 
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
-      headers: getAnthropicHeaders(),
+      headers: getOpenRouterHeaders(),
       body: JSON.stringify({
-        model: CLAUDE_MODEL,
+        model: AI_MODEL,
         max_tokens: 1024,
-        system: BREAKDOWN_SYSTEM_PROMPT,
         messages: [
-          {
-            role: "user",
-            content: `Break down this task into sub-tasks:\n\n${task.trim()}`,
-          },
+          { role: "system", content: BREAKDOWN_SYSTEM_PROMPT },
+          { role: "user", content: `Break down this task into sub-tasks:\n\n${task.trim()}` },
         ],
       }),
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("Claude API error:", errorText);
+      console.error("OpenRouter API error:", errorText);
       return NextResponse.json(
         { error: "Failed to generate breakdown" },
         { status: response.status }
@@ -40,14 +37,15 @@ export async function POST(req: NextRequest) {
     }
 
     const data = await response.json();
-    const content = data.content?.[0]?.text;
+    const content = data.choices?.[0]?.message?.content;
 
     if (!content) {
       return NextResponse.json({ error: "Empty response from AI" }, { status: 500 });
     }
 
-    // Parse the JSON response
-    const subTasks = JSON.parse(content);
+    // Parse the JSON response — strip markdown fences if present
+    const cleaned = content.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
+    const subTasks = JSON.parse(cleaned);
 
     return NextResponse.json({ subTasks });
   } catch (error) {
