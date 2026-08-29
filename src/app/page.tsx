@@ -698,3 +698,31 @@ export default function LandingPage() {
               </h2>
             </div>
             <div className="portfolio-grid">
+              {FEATURES.map((feat, i) => (
+                <div key={feat.title} className="reveal from-below" data-delay={String(i * 90)}>
+                  <article className="feature-card">
+                    <div className="feature-card-top">
+                      <span>{feat.category} — {feat.year}</span>
+                      <div className="feature-card-badge"><ArrowUpRight /></div>
+                    </div>
+                    <div className="feature-card-center">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={feat.image} alt={feat.title} className="feature-card-img" draggable={false} />
+                    </div>
+                    <div className="feature-card-bottom">
+                      <h3>{feat.title}</h3>
+                      <p>{feat.description}</p>
+                      <div className="feature-card-tags">
+                        {feat.tags.map((t) => <span key={t} className="tag-chip">{t}</span>)}
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Services ────────────────────────────────── */}
+        <section id="services" className="services">
+          <div className="shell services-inner">
