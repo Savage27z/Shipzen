@@ -196,3 +196,21 @@ export default function DashboardPage() {
                 <div>
                   <h1 style={{ fontSize: 26, fontWeight: 600, margin: 0, lineHeight: 1.2 }}>Ship without burning out</h1>
                   <p style={{ color: "#9a9a90", fontSize: 14, marginTop: 6 }}>
+                    {now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
+                    {streak > 0 && <span style={{ marginLeft: 12, color: "#2bc4a8", fontWeight: 500 }}>🔥 {streak} day streak</span>}
+                  </p>
+                </div>
+                <div style={{ display: "flex", gap: 0, background: "#ffffff", borderRadius: 12, padding: 4, border: "1px solid #ebebeb" }}>
+                  {(["Week", "Month", "Year"] as const).map(p => (
+                    <button key={p} onClick={() => setPeriod(p)} style={{
+                      padding: "7px 18px", borderRadius: 9, fontSize: 13, fontWeight: 500, border: "none", cursor: "pointer",
+                      background: period === p ? "#2bc4a8" : "transparent",
+                      color: period === p ? "#fff" : "#9a9a90",
+                      transition: "all 0.2s",
+                    }}>
+                      {p}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
