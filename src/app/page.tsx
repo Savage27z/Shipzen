@@ -474,3 +474,31 @@ export default function LandingPage() {
               <div className="loader-fill" style={{ width: `${loaderProgress}%` }} />
             </div>
             <div className="loader-meta">
+              <span>Loading</span>
+              <span className="loader-counter">{String(loaderProgress).padStart(3, "0")}</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Header ──────────────────────────────────────── */}
+      <header className={`site-header ${loaderDone ? "revealed" : ""}`}>
+        <div className="shell header-inner">
+          <button className="brand-btn" onClick={() => scrollToEl("home")}>
+            <LogoMark size="1.25rem" color="#10b981" />
+            ShipZen
+          </button>
+
+          <nav className="nav-primary">
+            <ul style={{ display: "flex", gap: "2rem", listStyle: "none" }}>
+              {navItems.map((item) =>
+                item.href ? (
+                  <li key={item.label}>
+                    <Link href={item.href} style={{ opacity: 0.8, transition: "opacity .3s, transform .3s" }}
+                      onMouseEnter={(e) => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.opacity = "0.8"; e.currentTarget.style.transform = "translateY(0)"; }}
+                    >{item.label}</Link>
+                  </li>
+                ) : (
+                  <li key={item.label}>
+                    <button onClick={() => handleNav(item)}>{item.label}</button>
