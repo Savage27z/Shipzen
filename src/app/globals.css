@@ -752,3 +752,32 @@ img{ display:block }
 }
 .modal-close:hover{ background:var(--surface-2); color:#111 }
 .modal-heading{ margin-bottom:1.5rem }
+.modal-dot{
+  display:inline-flex; align-items:center; gap:0.5rem;
+  font-size:0.875rem; font-weight:500; color:rgba(17,17,17,.6);
+}
+.modal-dot .accent-dot{
+  width:0.375rem; height:0.375rem; border-radius:9999px; background:var(--accent);
+}
+.modal-h2{
+  margin-top:0.375rem; font-size:1.5rem; font-weight:600; letter-spacing:-0.01em; color:#111;
+}
+@media(min-width:640px){ .modal-h2{ font-size:1.875rem } }
+.modal-form{
+  display:flex; flex-direction:column; gap:1rem;
+}
+.modal-label-text{
+  display:block; margin-bottom:0.375rem;
+  font-size:0.75rem; font-weight:500; text-transform:uppercase;
+  letter-spacing:.025em; color:rgba(17,17,17,.5);
+}
+.modal-input{
+  width:100%; border:1px solid var(--line);
+  background:rgba(241,240,238,.5); border-radius:var(--radius-control);
+  padding:0.75rem 1rem; font-size:0.875rem; color:#111;
+  outline:none; transition: border-color 0.3s, background 0.3s;
+  font-family:inherit;
+}
+.modal-input:focus{ border-color:rgba(17,17,17,.3); background:#fff }
+.modal-input::placeholder{ color:rgba(17,17,17,.35) }
+.modal-footer{
