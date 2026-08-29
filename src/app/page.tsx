@@ -894,3 +894,31 @@ export default function LandingPage() {
       <div className={`modal-backdrop ${modalOpen ? "open" : ""}`} onClick={closeModal} role="dialog" aria-modal="true">
         <div className="modal-panel" onClick={(e) => e.stopPropagation()}>
           <button className="modal-close" onClick={closeModal}><XIcon /></button>
+
+          {!modalSuccess ? (
+            <>
+              <div className="modal-heading">
+                <div className="modal-dot">
+                  <span className="accent-dot" />
+                  Get in touch
+                </div>
+                <h2 className="modal-h2">Tell us what you&apos;re building.</h2>
+              </div>
+              <form className="modal-form" onSubmit={(e) => {
+                e.preventDefault();
+                setModalSuccess(true);
+              }}>
+                <label>
+                  <span className="modal-label-text">Name</span>
+                  <input type="text" required placeholder="Your name" className="modal-input" />
+                </label>
+                <label>
+                  <span className="modal-label-text">Email</span>
+                  <input type="email" required placeholder="you@company.com" className="modal-input" />
+                </label>
+                <label>
+                  <span className="modal-label-text">Message</span>
+                  <textarea required rows={4} placeholder="A few words about what you need..." className="modal-input" style={{ resize: "none" }} />
+                </label>
+                <div className="modal-footer">
+                  <span className="modal-note">We reply within one business day.</span>
