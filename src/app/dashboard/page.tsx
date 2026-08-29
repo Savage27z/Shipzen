@@ -412,3 +412,21 @@ export default function DashboardPage() {
                     </div>
                   ))}
                 </div>
+              )}
+            </div>
+          )}
+
+          {activePage === "settings" && (
+            <div style={{ maxWidth: 520, margin: "0 auto" }}>
+              <h1 style={{ fontSize: 26, fontWeight: 600, marginBottom: 4 }}>Settings</h1>
+              <p style={{ color: "#9a9a90", fontSize: 14, marginBottom: 32 }}>Customize your ShipZen experience</p>
+              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                <div style={{ background: "#fff", borderRadius: 24, padding: "28px 32px", border: "1px solid #ebebeb" }}>
+                  <h3 style={{ fontSize: 15, fontWeight: 600, margin: "0 0 16px" }}>Timer</h3>
+                  {[
+                    { label: "Focus duration (minutes)", val: timerSettings.workMinutes, key: "workMinutes" as const, min: 1, max: 120 },
+                    { label: "Break duration (minutes)", val: timerSettings.breakMinutes, key: "breakMinutes" as const, min: 1, max: 30 },
+                  ].map(f => (
+                    <div key={f.key} style={{ marginBottom: 12 }}>
+                      <label style={{ fontSize: 13, color: "#9a9a90", display: "block", marginBottom: 6 }}>{f.label}</label>
+                      <input type="number" min={f.min} max={f.max} value={f.val}
