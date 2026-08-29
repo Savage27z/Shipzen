@@ -88,3 +88,21 @@ export default function DashboardPage() {
   const [mounted, setMounted] = useState(false);
   const [now, setNow] = useState(new Date());
   const [period, setPeriod] = useState<"Week" | "Month" | "Year">("Week");
+
+  useEffect(() => {
+    setTaskGroups(getTaskGroups()); setSessions(getSessions()); setTodaySessions(getTodaySessions());
+    setTimerSettingsState(getTimerSettings()); setStreak(getStreak()); setMounted(true);
+    const id = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const burnout = calculateBurnoutScore(todaySessions, streak);
+  const ship = calculateShipScore(taskGroups, todaySessions, burnout, streak);
+  const { count: bdc } = getBreakdownCount();
+  const maxBd = isPro() ? TIERS.pro.maxBreakdownsPerDay : TIERS.free.maxBreakdownsPerDay;
+  const remBd = maxBd - bdc;
+
+  const onSession = useCallback((session: WorkSession) => {
+    addSession(session); setSessions(getSessions()); setTodaySessions(getTodaySessions());
+    recordActivity(); setStreak(getStreak());
+    trackEvent("session_completed", { mode: session.mode, duration: session.durationMinutes });
