@@ -502,3 +502,31 @@ export default function LandingPage() {
                 ) : (
                   <li key={item.label}>
                     <button onClick={() => handleNav(item)}>{item.label}</button>
+                  </li>
+                )
+              )}
+            </ul>
+          </nav>
+
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <div className="clock-chip">
+              <span className="clock-label">Local time</span>
+              <span className="clock-time">{clockTime}</span>
+              <span className="clock-sep">•</span>
+              <span className="clock-date">{clockDate}</span>
+            </div>
+            <button className="menu-btn" onClick={openMenu}>
+              <GridIcon />
+              <span className="menu-label">Menu</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* ── Main ────────────────────────────────────────── */}
+      <main id="main" ref={mainRef}>
+
+        {/* ── Hero ────────────────────────────────────── */}
+        <section id="home" className="hero">
+          <div className="hero-bg-wrap">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
