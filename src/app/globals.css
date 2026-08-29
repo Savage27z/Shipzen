@@ -781,3 +781,22 @@ img{ display:block }
 .modal-input:focus{ border-color:rgba(17,17,17,.3); background:#fff }
 .modal-input::placeholder{ color:rgba(17,17,17,.35) }
 .modal-footer{
+  margin-top:0.5rem; display:flex; align-items:center; justify-content:space-between; gap:1rem;
+}
+.modal-note{
+  font-size:0.75rem; color:rgba(17,17,17,.45);
+}
+.modal-success{
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  padding-block:2rem; gap:1rem;
+}
+.modal-success-badge{
+  width:3.5rem; height:3.5rem; display:grid; place-items:center;
+  border-radius:9999px; background:#0a0a0a; color:var(--accent-from); font-size:1.5rem;
+}
+.modal-success h2{ font-size:1.5rem; font-weight:600; color:#111 }
+.modal-success p{
+  max-width:32ch; font-size:0.875rem; color:rgba(17,17,17,.6);
+}
+
+/* ── Dashboard page keeps its own dark palette ─────────── */
