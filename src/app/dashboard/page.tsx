@@ -268,3 +268,21 @@ export default function DashboardPage() {
                         <span style={{ fontSize: 11, color: "#b0b0a8", textTransform: "uppercase", letterSpacing: "0.15em", fontWeight: 500, marginTop: 4 }}>
                           {timer.mode === "work" ? "Focus" : "Break"}
                         </span>
+                      </div>
+                    </div>
+                    <div style={{ display: "flex", gap: 10 }}>
+                      {timer.status === "idle" && (
+                        <button onClick={timer.start} style={{
+                          padding: "10px 36px", borderRadius: 50, fontSize: 14, fontWeight: 600, border: "none", cursor: "pointer",
+                          background: timer.mode === "work" ? "#2bc4a8" : "#4a9fd8", color: "#fff",
+                        }}>Start</button>
+                      )}
+                      {timer.status === "running" && (
+                        <>
+                          <button onClick={timer.pause} style={{ padding: "10px 24px", borderRadius: 50, fontSize: 14, fontWeight: 500, border: "none", cursor: "pointer", background: "#f4f4f0", color: "#1a1a1a" }}>Pause</button>
+                          <button onClick={timer.skip} style={{ padding: "10px 20px", borderRadius: 50, fontSize: 14, border: "1px solid #ebebeb", cursor: "pointer", background: "transparent", color: "#9a9a90" }}>Skip</button>
+                        </>
+                      )}
+                      {timer.status === "paused" && (
+                        <>
+                          <button onClick={timer.start} style={{ padding: "10px 24px", borderRadius: 50, fontSize: 14, fontWeight: 600, border: "none", cursor: "pointer", background: "#2bc4a8", color: "#fff" }}>Resume</button>
