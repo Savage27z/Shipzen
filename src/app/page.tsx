@@ -670,3 +670,31 @@ export default function LandingPage() {
           <ul className="shell create-band-list">
             {[
               { word: "Ship", variant: "tile-light" },
+              { word: "Smart", variant: "tile-accent" },
+              { icon: true, variant: "tile-dark" },
+              { word: "Zen", variant: "tile-ghost" },
+            ].map((item, i) => (
+              <li key={i} className="reveal create-band-item" data-delay={String(i * 120)}>
+                <div className={`create-band-tile ${item.variant}`}>
+                  {item.icon ? <span style={{ fontSize: "2.25rem" }}><ArrowRight /></span> : item.word}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* ── Features (Portfolio) ────────────────────── */}
+        <section id="works" className="portfolio">
+          <div className="shell portfolio-inner">
+            <div className="portfolio-header">
+              <div className="reveal eyebrow light portfolio-eyebrow">
+                <span className="eyebrow-dot" style={{ background: "rgba(17,17,17,.5)" }} />
+                Features
+              </div>
+              <h2 className="portfolio-h2">
+                <span className="line-reveal-line">
+                  <span className="line-reveal-inner" data-delay="120">Core Features</span>
+                </span>
+              </h2>
+            </div>
+            <div className="portfolio-grid">
