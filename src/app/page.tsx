@@ -334,3 +334,31 @@ export default function LandingPage() {
 
       // Decay the mask (fade existing strokes toward transparent)
       maskCtx.globalCompositeOperation = "destination-out";
+      maskCtx.fillStyle = `rgba(0,0,0,${DECAY})`;
+      maskCtx.fillRect(0, 0, w, h);
+      maskCtx.globalCompositeOperation = "source-over";
+
+      // Only stamp when cursor has actually moved
+      if (hasMoved && mx > -9000) {
+        // First entry — snap to cursor, don't draw a trail from off-screen
+        if (prevMx < -9000) { prevMx = mx; prevMy = my; }
+        const dx = mx - prevMx, dy = my - prevMy;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist > 1) {
+          const steps = Math.max(1, Math.floor(dist / 8));
+          for (let i = 0; i <= steps; i++) {
+            const t = i / steps;
+            stampBrush(prevMx + dx * t, prevMy + dy * t);
+          }
+          prevMx = mx;
+          prevMy = my;
+        }
+        hasMoved = false;
+      }
+
+      // Composite: draw the reveal image masked by the brush trail
+      ctx!.clearRect(0, 0, w, h);
+      if (revealImg && revealImg.complete) {
+        ctx!.save();
+        ctx!.drawImage(maskCanvas, 0, 0);
+        ctx!.globalCompositeOperation = "source-in";
