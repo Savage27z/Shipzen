@@ -166,3 +166,31 @@ export default function LandingPage() {
           setLoaderExit(true);
           setTimeout(() => {
             setLoaderDone(true);
+            document.documentElement.style.removeProperty("overflow");
+            document.documentElement.style.removeProperty("position");
+            document.documentElement.style.removeProperty("height");
+          }, 700);
+        }, 200);
+      }
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  // ── Lenis smooth scroll ───────────────────────────────
+  useEffect(() => {
+    let raf: number;
+    import("lenis").then(({ default: Lenis }) => {
+      const lenis = new Lenis({ smoothWheel: true });
+      lenisRef.current = lenis;
+      const loop = (t: number) => { lenis.raf(t); raf = requestAnimationFrame(loop); };
+      raf = requestAnimationFrame(loop);
+    });
+    return () => { cancelAnimationFrame(raf); lenisRef.current?.destroy(); };
+  }, []);
+
+  // ── Adaptive grid scale-up ────────────────────────────
+  useEffect(() => {
+    function apply() {
+      const FONT_BASE = 16, baseWidth = 1920, coef = 0.6666;
+      const w = window.innerWidth;
