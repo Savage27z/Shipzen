@@ -288,3 +288,32 @@ img{ display:block }
   border-radius:9999px; font-size:1rem;
   transition: transform 0.35s cubic-bezier(.2,.8,.2,1);
 }
+.pill-inner.dark .pill-arrow{ background:#fff; color:#0a0a0a }
+.pill-inner.light .pill-arrow{ background:#0a0a0a; color:#fff }
+.pill-inner.outline .pill-arrow{ background:#fff; color:#0a0a0a }
+.pill-inner.outline-dark .pill-arrow{ background:#0a0a0a; color:#fff }
+.pill-btn:hover .pill-arrow.arrow-right{ transform:translateX(3px) }
+.pill-btn:hover .pill-arrow.arrow-up-right{ transform:translate(2px,-2px) }
+
+/* ── Hero Card ─────────────────────────────────────────── */
+.hero-card{
+  width:100%; max-width:24rem;
+  border-radius:var(--radius-card-sm);
+  background:rgba(255,255,255,.7);
+  padding:0.5rem;
+  box-shadow:0 1px 3px rgba(0,0,0,.08);
+  border:1px solid rgba(230,229,226,.7);
+  backdrop-filter:blur(12px);
+}
+@media(min-width:1024px){ .hero-card{ width:19rem } }
+.hero-card-row{
+  display:flex; gap:0.5rem; cursor:pointer; border-radius:var(--radius-control);
+}
+.hero-card-tile{
+  aspect-ratio:1; width:6rem; display:grid; place-items:center;
+  border-radius:var(--radius-control);
+  background:#0a0a0a;
+  font-size:1.875rem; color:#cf8047;
+}
+.hero-card-panel{
+  flex:1; border-radius:var(--radius-control);
