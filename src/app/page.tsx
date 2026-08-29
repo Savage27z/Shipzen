@@ -446,3 +446,31 @@ export default function LandingPage() {
   const handleNav = (item: typeof navItems[0]) => {
     closeMenu();
     if (item.action === "modal") { setTimeout(openModal, 100); return; }
+    if (item.href) return; // Link handles it
+    scrollToEl(item.id!);
+  };
+
+  return (
+    <>
+      {/* ── Skip link ───────────────────────────────────── */}
+      <a href="#main" className="sr-only" style={{
+        position: "fixed", left: "1rem", top: "1rem", zIndex: 60,
+        borderRadius: ".875rem", background: "#0a0a0a", padding: ".5rem 1rem",
+        fontSize: ".875rem", color: "#fff"
+      }}>Skip to content</a>
+
+      {/* ── Loader ──────────────────────────────────────── */}
+      {!loaderDone && (
+        <div className={`page-loader ${loaderExit ? "exit" : ""}`}>
+          <div className="loader-content">
+            <div className="loader-brand">
+              <LogoMark size="1.875rem" color="#34d399" />
+              ShipZen
+            </div>
+            <p className="loader-tagline">Ship smart. Stay zen.</p>
+          </div>
+          <div className="loader-progress">
+            <div className="loader-track">
+              <div className="loader-fill" style={{ width: `${loaderProgress}%` }} />
+            </div>
+            <div className="loader-meta">
