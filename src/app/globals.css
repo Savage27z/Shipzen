@@ -520,3 +520,32 @@ img{ display:block }
 .services{
   background:#fff;
 }
+.services-inner{
+  padding:5rem 1.25rem;
+}
+@media(min-width:640px){ .services-inner{ padding-inline:2rem } }
+@media(min-width:1024px){ .services-inner{ padding-block:7rem } }
+.services-h2{
+  margin:1.25rem 0 3rem; max-width:16ch;
+  font-size:2.25rem; font-weight:600; letter-spacing:-0.02em;
+}
+@media(min-width:640px){ .services-h2{ margin-bottom:3.5rem; font-size:3rem } }
+
+.service-row{
+  border-top:1px solid var(--line);
+}
+.service-row:first-child{ border-top:none }
+.service-row-inner{
+  display:flex; align-items:center; gap:1rem;
+  border-radius:var(--radius-card-sm);
+  padding:1.5rem 1.5rem;
+  transition: background 0.5s cubic-bezier(.16,1,.3,1), padding-left 0.5s cubic-bezier(.16,1,.3,1), padding-right 0.5s cubic-bezier(.16,1,.3,1);
+}
+@media(min-width:640px){ .service-row-inner{ gap:1.5rem; padding-block:2rem } }
+.service-row-inner:hover{
+  background:rgba(241,240,238,1);
+  padding-left:2rem; padding-right:1.25rem;
+}
+.service-index{
+  width:1.75rem; font-size:0.875rem; font-weight:500; color:rgba(17,17,17,.4); flex-shrink:0;
+}
