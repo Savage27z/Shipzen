@@ -230,3 +230,32 @@ img{ display:block }
   display:block; overflow:hidden;
 }
 .line-reveal-inner{
+  display:block;
+  transform:translateY(105%); opacity:0;
+  transition: transform 0.9s cubic-bezier(.215,.61,.355,1), opacity 0.9s cubic-bezier(.215,.61,.355,1);
+}
+.line-reveal-inner.revealed{
+  transform:translateY(0); opacity:1;
+}
+
+.word-reveal-word{
+  display:inline-block; overflow:hidden;
+}
+.word-reveal-inner{
+  display:inline-block;
+  transform:translateY(24px); opacity:0;
+  transition: transform 0.7s cubic-bezier(.165,.84,.44,1), opacity 0.7s cubic-bezier(.165,.84,.44,1);
+}
+.word-reveal-inner.revealed{
+  transform:translateY(0); opacity:1;
+}
+
+/* ── Hero H1 ───────────────────────────────────────────── */
+.hero-h1{
+  max-width:18ch; font-size:2.25rem; font-weight:600; line-height:.98;
+  letter-spacing:-0.02em; color:#111;
+}
+@media(min-width:640px){ .hero-h1{ font-size:3rem } }
+@media(min-width:768px){ .hero-h1{ font-size:3.75rem } }
+
+/* ── Rating row ────────────────────────────────────────── */
