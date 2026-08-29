@@ -124,3 +124,21 @@ export default function DashboardPage() {
     incrementBreakdownCount(); setTaskGroups(getTaskGroups());
   }, []);
 
+  const onRemove = useCallback((gid: string) => { removeTaskGroup(gid); setTaskGroups(getTaskGroups()); }, []);
+  const dismissNudge = useCallback((id: string) => { setNudges(p => p.filter(n => n.id !== id)); }, []);
+
+  const reqNudge = useCallback(async () => {
+    try {
+      const ctx = getNudgeContext(getSessions(), burnout, ship, getTaskGroups());
+      const res = await fetch("/api/nudge", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ context: ctx }) });
+      if (!res.ok) return; const data = await res.json();
+      const n: Nudge = { id: crypto.randomUUID(), message: data.message, type: data.type, timestamp: Date.now() };
+      setNudges(p => [...p, n]); setTimeout(() => setNudges(p => p.filter(x => x.id !== n.id)), 15000);
+    } catch {}
+  }, [burnout, ship]);
+
+  const focusCount = todaySessions.filter(s => s.mode === "work").length;
+  const focusMins = todaySessions.filter(s => s.mode === "work").reduce((a, s) => a + s.durationMinutes, 0);
+  const tasksTotal = taskGroups.reduce((a, g) => a + g.subTasks.length, 0);
+  const tasksDone = taskGroups.reduce((a, g) => a + g.subTasks.filter(t => t.completed).length, 0);
+
