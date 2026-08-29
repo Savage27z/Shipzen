@@ -726,3 +726,31 @@ export default function LandingPage() {
         {/* ── Services ────────────────────────────────── */}
         <section id="services" className="services">
           <div className="shell services-inner">
+            <div className="reveal eyebrow light">
+              <span className="eyebrow-dot" style={{ background: "rgba(17,17,17,.5)" }} />
+              How It Works
+            </div>
+            <h2 className="services-h2">
+              <span className="line-reveal-line">
+                <span className="line-reveal-inner" data-delay="120">What ShipZen does best</span>
+              </span>
+            </h2>
+            <ul>
+              {SERVICES.map((svc, i) => (
+                <li key={svc.title} className="reveal service-row" data-delay={String(i * 80)}>
+                  <div className="service-row-inner">
+                    <span className="service-index">{String(i + 1).padStart(2, "0")}</span>
+                    <h3 className="service-title">{svc.title}</h3>
+                    <p className="service-desc">{svc.desc}</p>
+                    <div className="service-badge"><ArrowUpRight /></div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* ── Stats ───────────────────────────────────── */}
+        <section id="stats-section" className="stats">
+          <div className="shell stats-outer">
+            <div className="reveal scale-in stats-panel">
