@@ -54,3 +54,31 @@ const ZenIcon = () => (
     <path d="M2.75 12h18.5" />
   </svg>
 );
+
+/* ── Helpers ────────────────────────────────────────────── */
+function easeInOutCubic(t: number) {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
+
+function formatClock() {
+  const d = new Date();
+  const h = d.getHours() % 12 || 12;
+  const m = d.getMinutes().toString().padStart(2, "0");
+  const meridiem = d.getHours() >= 12 ? "pm" : "am";
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const date = `${d.getDate()} ${months[d.getMonth()]}, ${d.getFullYear()}`;
+  return { time: `${h}:${m}${meridiem}`, date };
+}
+
+/* ── Data ───────────────────────────────────────────────── */
+const HERO_CARDS = [
+  { caption: "AI-Powered", title: "Break it down." },
+  { caption: "Focus Tracking", title: "Ship with flow." },
+  { caption: "Burnout Score", title: "Stay balanced." },
+];
+
+const PARTNERS = ["React", "Next.js", "TypeScript", "Tailwind", "Claude AI", "Vercel", "Node.js"];
+
+const FEATURES = [
+  {
+    image: "/features/breakdown.jpg",
