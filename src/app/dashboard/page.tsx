@@ -250,3 +250,21 @@ export default function DashboardPage() {
                         }}>
                           {m === "work" ? "Focus" : "Break"}
                         </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                    <div style={{ position: "relative", width: 200, height: 200, marginBottom: 24 }}>
+                      <svg style={{ width: "100%", height: "100%", transform: "rotate(-90deg)" }} viewBox="0 0 200 200">
+                        <circle cx="100" cy="100" r={radius} fill="none" stroke="#f0f0ec" strokeWidth="5" />
+                        <circle cx="100" cy="100" r={radius} fill="none"
+                          stroke={timer.mode === "work" ? "#2bc4a8" : "#4a9fd8"}
+                          strokeWidth="5" strokeLinecap="round"
+                          strokeDasharray={circ} strokeDashoffset={dashOff}
+                          style={{ transition: "stroke-dashoffset 1s ease" }} />
+                      </svg>
+                      <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+                        <span style={{ fontSize: 48, fontWeight: 600, letterSpacing: "-0.03em", fontVariantNumeric: "tabular-nums" }}>{timer.fmt(timer.secondsLeft)}</span>
+                        <span style={{ fontSize: 11, color: "#b0b0a8", textTransform: "uppercase", letterSpacing: "0.15em", fontWeight: 500, marginTop: 4 }}>
+                          {timer.mode === "work" ? "Focus" : "Break"}
+                        </span>
