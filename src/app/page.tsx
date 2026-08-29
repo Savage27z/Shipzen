@@ -194,3 +194,31 @@ export default function LandingPage() {
     function apply() {
       const FONT_BASE = 16, baseWidth = 1920, coef = 0.6666;
       const w = window.innerWidth;
+      const widthReduction = ((baseWidth - w) / baseWidth) * 100;
+      const size = FONT_BASE - (FONT_BASE * (widthReduction * coef)) / 100;
+      if (size > FONT_BASE) document.documentElement.style.fontSize = size + "px";
+      else document.documentElement.style.removeProperty("font-size");
+    }
+    apply();
+    window.addEventListener("resize", apply);
+    return () => window.removeEventListener("resize", apply);
+  }, []);
+
+  // ── Clock ─────────────────────────────────────────────
+  useEffect(() => {
+    const update = () => { const c = formatClock(); setClockTime(c.time); setClockDate(c.date); };
+    update();
+    const id = setInterval(update, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  // ── Scroll reveals ────────────────────────────────────
+  useEffect(() => {
+    if (!loaderDone) return;
+    const els = document.querySelectorAll<HTMLElement>(".reveal, .line-reveal-inner, .word-reveal-inner");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            const el = e.target as HTMLElement;
+            const delay = parseInt(el.dataset.delay || "0", 10);
