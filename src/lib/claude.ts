@@ -1,7 +1,7 @@
 // AI API client helpers — uses OpenRouter for model access
 // Used by API routes only (server-side)
 
-export const AI_MODEL = "anthropic/claude-sonnet-4";
+export const AI_MODEL = "google/gemini-2.5-flash";
 
 export function getOpenRouterHeaders() {
   return {
