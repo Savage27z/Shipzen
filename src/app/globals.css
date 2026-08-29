@@ -317,3 +317,32 @@ img{ display:block }
 }
 .hero-card-panel{
   flex:1; border-radius:var(--radius-control);
+  background:rgba(241,240,238,.7);
+  padding:0.75rem; display:flex; flex-direction:column; justify-content:space-between;
+}
+.hero-card-caption{
+  font-size:0.65rem; font-weight:500; text-transform:uppercase;
+  letter-spacing:.05em; color:rgba(17,17,17,.45);
+}
+.hero-card-title{
+  max-width:8rem; font-size:0.875rem; font-weight:500; line-height:1.35; color:#111;
+}
+.hero-card-dots{
+  display:flex; gap:0.25rem; align-items:center;
+}
+.hero-card-dot{
+  height:0.25rem; border-radius:9999px;
+  transition:all .3s ease;
+}
+.hero-card-dot.active{ width:1rem; background:rgba(17,17,17,.7) }
+.hero-card-dot.inactive{ width:0.375rem; background:rgba(17,17,17,.2) }
+.hero-card-nav{
+  display:flex; gap:0.25rem;
+}
+.hero-card-nav button{
+  width:1.75rem; height:1.75rem; display:grid; place-items:center;
+  border-radius:9999px; background:#fff;
+  color:rgba(17,17,17,.7); border:1px solid #e6e5e2;
+  transition: color 0.3s, background 0.3s;
+}
+.hero-card-nav button:hover{ color:#111; background:#f5f5f5 }
