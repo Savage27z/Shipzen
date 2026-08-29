@@ -160,3 +160,21 @@ export default function DashboardPage() {
 
   const statCards = [
     { label: "Focus Sessions", value: focusCount, sub: "today", bg: "#e0f5ef", color: "#2bc4a8", seed: 1 },
+    { label: "Minutes Focused", value: focusMins, sub: "total", bg: "#e0f0f9", color: "#4a9fd8", seed: 2 },
+    { label: "Tasks Completed", value: tasksDone, sub: `of ${tasksTotal}`, bg: "#fef4e0", color: "#e8a838", seed: 3 },
+  ];
+
+  return (
+    <div style={{ minHeight: "100vh", display: "flex", background: "#f8f8f6", fontFamily: "'Onest', system-ui, sans-serif", color: "#1a1a1a" }}>
+
+      {/* ── Sidebar ── */}
+      <aside className="hidden md:flex" style={{ width: 72, background: "#ffffff", borderRight: "1px solid #ebebeb", flexDirection: "column", alignItems: "center", paddingTop: 28, paddingBottom: 28, gap: 4 }}>
+        <Link href="/" style={{ color: "#2bc4a8", marginBottom: 28, display: "block" }}>
+          <Star className="w-7 h-7" />
+        </Link>
+        {nav.map(n => (
+          <button key={n.id} onClick={() => setActivePage(n.id)} title={n.label}
+            style={{
+              width: 44, height: 44, borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center",
+              background: activePage === n.id ? "#e0f5ef" : "transparent",
+              color: activePage === n.id ? "#2bc4a8" : "#b0b0a8",
