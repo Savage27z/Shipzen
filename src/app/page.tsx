@@ -838,3 +838,31 @@ export default function LandingPage() {
           </div>
 
           <div className="footer-legal">
+            <span>© 2026 ShipZen. All rights reserved.</span>
+            <div className="footer-legal-links">
+              <span className="footer-link">Privacy</span>
+              <span className="footer-link">Terms</span>
+            </div>
+          </div>
+        </div>
+        <div className="footer-watermark">SHIPZEN</div>
+      </footer>
+
+      {/* ── Nav Menu ─────────────────────────────────────── */}
+      <div className={`nav-menu ${menuOpen ? "open" : ""}`}>
+        <div className="shell nav-menu-bar">
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "1.125rem", fontWeight: 600 }}>
+            <LogoMark size="1.25rem" color="#34d399" />
+            ShipZen
+          </div>
+          <button className="nav-menu-close" onClick={closeMenu}>
+            <XIcon /> Close
+          </button>
+        </div>
+        <nav className="shell nav-menu-nav">
+          <ul style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+            {navItems.map((item, i) => (
+              <li key={item.label}>
+                {item.href ? (
+                  <Link href={item.href} className="nav-menu-item"
+                    style={{ transitionDelay: menuOpen ? `${i * 45 + 80}ms` : "0ms" }}
