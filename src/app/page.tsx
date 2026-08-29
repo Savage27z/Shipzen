@@ -26,3 +26,31 @@ const StarIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: "1em", height: "1em" }}>
     <path d="M12 2.5l2.9 5.88 6.49.94-4.7 4.58 1.11 6.46L12 17.9l-5.8 3.05 1.1-6.46-4.69-4.58 6.49-.94L12 2.5z" />
   </svg>
+);
+
+const XIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ width: "1em", height: "1em" }}>
+    <path d="M4 4l16 16M20 4 4 20" />
+  </svg>
+);
+
+const GridIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ width: "1em", height: "1em" }}>
+    <path d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+);
+
+const CircleDot = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} style={{ width: "1em", height: "1em" }}>
+    <circle cx={12} cy={12} r={9} />
+    <circle cx={12} cy={12} r={3.2} fill="currentColor" stroke="none" />
+  </svg>
+);
+
+const ZenIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} style={{ width: "1em", height: "1em" }}>
+    <circle cx={12} cy={12} r={9.25} />
+    <path d="M12 2.75c2.6 2.3 4 5.8 4 9.25s-1.4 6.95-4 9.25c-2.6-2.3-4-5.8-4-9.25s1.4-6.95 4-9.25z" />
+    <path d="M2.75 12h18.5" />
+  </svg>
+);
