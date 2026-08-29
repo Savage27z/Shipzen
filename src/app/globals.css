@@ -694,3 +694,32 @@ img{ display:block }
 @media(min-width:640px){ .nav-menu-item{ font-size:3.75rem } }
 .nav-menu.open .nav-menu-item{
   transform:translateY(0); opacity:1;
+}
+.nav-menu-idx{
+  font-size:1rem; font-weight:400; color:rgba(255,255,255,.3);
+  transition: color 0.3s;
+}
+.nav-menu-item:hover .nav-menu-idx{ color:var(--accent-from) }
+.nav-menu-label{
+  color:rgba(255,255,255,.7);
+  transition: color 0.3s;
+}
+.nav-menu-item:hover .nav-menu-label{ color:#fff }
+.nav-menu-bottom{
+  display:flex; flex-direction:column; gap:0.75rem;
+  border-top:1px solid rgba(255,255,255,.1);
+  padding:1.5rem 1.25rem; font-size:0.75rem;
+  text-transform:uppercase; letter-spacing:.025em; color:rgba(255,255,255,.45);
+}
+@media(min-width:640px){
+  .nav-menu-bottom{ flex-direction:row; justify-content:space-between; padding-inline:2rem }
+}
+.nav-menu-bottom button{
+  color:rgba(255,255,255,.7);
+  transition: color 0.3s;
+}
+.nav-menu-bottom button:hover{ text-decoration:underline; color:#fff }
+
+/* ── Request Modal ─────────────────────────────────────── */
+.modal-backdrop{
+  position:fixed; inset:0; z-index:110;
