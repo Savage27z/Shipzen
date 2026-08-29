@@ -304,3 +304,21 @@ export default function DashboardPage() {
                     <div style={{ position: "absolute", bottom: -30, left: -10, width: 80, height: 80, borderRadius: "50%", background: "rgba(255,255,255,0.05)" }} />
                     <p style={{ fontSize: 13, fontWeight: 500, margin: 0, opacity: 0.8 }}>Ship Score</p>
                     <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginTop: 8 }}>
+                      <span style={{ fontSize: 52, fontWeight: 700, lineHeight: 1, letterSpacing: "-0.03em" }}>{ship.score}</span>
+                      <span style={{ fontSize: 14, opacity: 0.7 }}>/ 100</span>
+                    </div>
+                    <p style={{ fontSize: 12, opacity: 0.6, marginTop: 8, margin: "8px 0 0" }}>+{ship.healthBonus} health bonus</p>
+                  </div>
+
+                  {/* Burnout Risk */}
+                  <div style={{ background: "#fff", borderRadius: 24, padding: "24px 28px", border: "1px solid #ebebeb" }}>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+                      <p style={{ fontSize: 14, fontWeight: 600, margin: 0 }}>Burnout Risk</p>
+                      <span style={{
+                        fontSize: 12, fontWeight: 600, padding: "4px 12px", borderRadius: 20,
+                        background: burnout.level === "green" ? "#e0f5ef" : burnout.level === "yellow" ? "#fef4e0" : "#fde8e8",
+                        color: burnout.level === "green" ? "#2bc4a8" : burnout.level === "yellow" ? "#e8a838" : "#e05252",
+                      }}>
+                        {burnout.score}%
+                      </span>
+                    </div>
