@@ -322,3 +322,21 @@ export default function DashboardPage() {
                         {burnout.score}%
                       </span>
                     </div>
+                    {[
+                      { l: "Long sessions", v: burnout.factors.longSessions, m: 30 },
+                      { l: "Late nights", v: burnout.factors.lateNightWork, m: 25 },
+                      { l: "Skipped breaks", v: burnout.factors.skippedBreaks, m: 25 },
+                    ].map(f => (
+                      <div key={f.l} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+                        <span style={{ fontSize: 12, color: "#9a9a90", width: 100, flexShrink: 0 }}>{f.l}</span>
+                        <div style={{ flex: 1, height: 6, borderRadius: 3, background: "#f4f4f0", overflow: "hidden" }}>
+                          <div style={{
+                            height: "100%", borderRadius: 3, transition: "width 0.5s ease",
+                            width: `${Math.max(4, (f.v / f.m) * 100)}%`,
+                            background: f.v > f.m * 0.6 ? "#e05252" : "#2bc4a8",
+                          }} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
