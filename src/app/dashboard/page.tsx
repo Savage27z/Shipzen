@@ -394,3 +394,21 @@ export default function DashboardPage() {
               <p style={{ color: "#9a9a90", fontSize: 14, marginBottom: 32 }}>Your work sessions over time</p>
               {sessions.length === 0 ? (
                 <div style={{ textAlign: "center" as const, padding: "60px 0", color: "#c4c4be" }}>
+                  <p style={{ fontSize: 14, margin: 0 }}>No sessions recorded yet</p>
+                  <p style={{ fontSize: 12, marginTop: 4 }}>Start a focus session to begin tracking</p>
+                </div>
+              ) : (
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  {[...sessions].reverse().slice(0, 50).map(s => (
+                    <div key={s.id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 24px", background: "#fff", borderRadius: 18, border: "1px solid #ebebeb" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                        <div style={{ width: 10, height: 10, borderRadius: "50%", background: s.mode === "work" ? "#2bc4a8" : "#4a9fd8" }} />
+                        <div>
+                          <p style={{ fontSize: 14, margin: 0, textTransform: "capitalize" as const }}>{s.mode} session</p>
+                          <p style={{ fontSize: 12, color: "#9a9a90", margin: 0 }}>{new Date(s.startedAt).toLocaleString()}</p>
+                        </div>
+                      </div>
+                      <span style={{ fontSize: 14, fontWeight: 600, color: "#9a9a90", fontVariantNumeric: "tabular-nums" }}>{s.durationMinutes}m</span>
+                    </div>
+                  ))}
+                </div>
