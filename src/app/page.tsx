@@ -278,3 +278,31 @@ export default function LandingPage() {
     let w = 0, h = 0, raf: number;
     let mx = -9999, my = -9999;
     let prevMx = mx, prevMy = my;
+    let hasMoved = false;
+    let revealImg: HTMLImageElement | null = null;
+    let maskCanvas: HTMLCanvasElement | null = null;
+    let maskCtx: CanvasRenderingContext2D | null = null;
+
+    // The mask is a grayscale canvas: white = reveal, decays to black over time
+    function resize() {
+      const rect = canvas!.parentElement!.getBoundingClientRect();
+      const dpr = Math.min(devicePixelRatio, 2);
+      w = rect.width * dpr;
+      h = rect.height * dpr;
+      canvas!.width = w;
+      canvas!.height = h;
+      canvas!.style.width = rect.width + "px";
+      canvas!.style.height = rect.height + "px";
+
+      if (!maskCanvas) {
+        maskCanvas = document.createElement("canvas");
+        maskCtx = maskCanvas.getContext("2d");
+      }
+      maskCanvas.width = w;
+      maskCanvas.height = h;
+    }
+
+    function stampBrush(x: number, y: number) {
+      if (!maskCtx) return;
+      const grad = maskCtx.createRadialGradient(x, y, 0, x, y, BRUSH_RADIUS);
+      grad.addColorStop(0, "rgba(255,255,255,1)");
