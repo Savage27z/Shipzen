@@ -922,3 +922,31 @@ export default function LandingPage() {
                 </label>
                 <div className="modal-footer">
                   <span className="modal-note">We reply within one business day.</span>
+                  <button type="submit" className="pill-btn">
+                    <span className="pill-inner dark with-arrow">
+                      Send request
+                      <span className="pill-arrow arrow-up-right"><ArrowUpRight /></span>
+                    </span>
+                  </button>
+                </div>
+              </form>
+            </>
+          ) : (
+            <div className="modal-success">
+              <div className="modal-success-badge"><LogoMark size="1.5rem" color="#34d399" /></div>
+              <h2>Message received</h2>
+              <p>Thanks for reaching out — we&apos;ll get back to you within one business day.</p>
+              <button className="pill-btn" onClick={closeModal}>
+                <span className="pill-inner dark no-arrow">Close</span>
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
+}
+
+/* ── Word Reveal sub-component ──────────────────────────── */
+function WordReveal({ text, muted }: { text: string; muted?: boolean }) {
+  return (
