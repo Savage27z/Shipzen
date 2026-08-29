@@ -138,3 +138,31 @@ export default function LandingPage() {
   const [modalSuccess, setModalSuccess] = useState(false);
   const [clockTime, setClockTime] = useState("9:41am");
   const [clockDate, setClockDate] = useState("28 August, 2026");
+  const [heroCardIdx, setHeroCardIdx] = useState(0);
+  const [statValues, setStatValues] = useState([0, 0, 0, 0]);
+
+  const mainRef = useRef<HTMLElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const lenisRef = useRef<any>(null);
+
+  // ── Loader ────────────────────────────────────────────
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.style.overflow = "hidden";
+    document.documentElement.style.position = "relative";
+    document.documentElement.style.height = "100%";
+
+    const FILL_MS = 1300;
+    const start = performance.now();
+    let raf: number;
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / FILL_MS, 1);
+      const eased = easeInOutCubic(t);
+      setLoaderProgress(Math.round(eased * 100));
+      if (t < 1) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        setTimeout(() => {
+          setLoaderExit(true);
+          setTimeout(() => {
+            setLoaderDone(true);
