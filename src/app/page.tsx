@@ -222,3 +222,31 @@ export default function LandingPage() {
           if (e.isIntersecting) {
             const el = e.target as HTMLElement;
             const delay = parseInt(el.dataset.delay || "0", 10);
+            setTimeout(() => el.classList.add("revealed"), delay);
+            observer.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [loaderDone]);
+
+  // ── Stats count-up ────────────────────────────────────
+  useEffect(() => {
+    if (!loaderDone) return;
+    const statsEl = document.getElementById("stats-section");
+    if (!statsEl) return;
+    const observer = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          const animate = () => {
+            const rect = statsEl.getBoundingClientRect();
+            const vh = window.innerHeight;
+            const progress = Math.min(1, Math.max(0, 1 - rect.top / vh));
+            setStatValues(STATS.map((s) => Math.round(progress * s.value)));
+            if (progress < 1) requestAnimationFrame(animate);
+          };
+          requestAnimationFrame(animate);
+          // keep observing for scroll-driven updates via scroll listener
