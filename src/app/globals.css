@@ -549,3 +549,32 @@ img{ display:block }
 .service-index{
   width:1.75rem; font-size:0.875rem; font-weight:500; color:rgba(17,17,17,.4); flex-shrink:0;
 }
+@media(min-width:640px){ .service-index{ width:2.5rem } }
+.service-title{
+  flex:1; font-size:1.5rem; font-weight:500; letter-spacing:-0.01em;
+}
+@media(min-width:640px){ .service-title{ font-size:1.875rem } }
+@media(min-width:768px){ .service-title{ font-size:2.25rem } }
+.service-desc{
+  display:none; max-width:20rem; font-size:0.875rem; color:rgba(17,17,17,.55);
+}
+@media(min-width:1024px){ .service-desc{ display:block } }
+.service-badge{
+  width:2.5rem; height:2.5rem; display:grid; place-items:center;
+  border-radius:9999px; background:#0a0a0a; color:#fff; flex-shrink:0;
+  transition: transform 0.35s cubic-bezier(.2,.8,.2,1);
+}
+@media(min-width:640px){ .service-badge{ width:3rem; height:3rem } }
+.service-row-inner:hover .service-badge{ transform:translateX(5px) }
+
+/* ── Stats ─────────────────────────────────────────────── */
+.stats{
+  background:#fff;
+}
+.stats-outer{
+  padding:0 1.25rem 5rem;
+}
+@media(min-width:640px){ .stats-outer{ padding-inline:2rem } }
+@media(min-width:1024px){ .stats-outer{ padding-bottom:7rem } }
+.stats-panel{
+  border-radius:var(--radius-card); background:#0a0a0a;
