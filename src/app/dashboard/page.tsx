@@ -376,3 +376,21 @@ export default function DashboardPage() {
                 <TaskList taskGroups={taskGroups} onToggleTask={onToggle} onAddGroup={onAdd} onRemoveGroup={onRemove} remainingBreakdowns={remBd} />
               </div>
             </>
+          )}
+
+          {activePage === "tasks" && (
+            <div style={{ maxWidth: 700, margin: "0 auto" }}>
+              <h1 style={{ fontSize: 26, fontWeight: 600, marginBottom: 4 }}>Tasks</h1>
+              <p style={{ color: "#9a9a90", fontSize: 14, marginBottom: 32 }}>Break down big tasks into shippable pieces</p>
+              <div style={{ background: "#fff", borderRadius: 24, padding: "28px 32px", border: "1px solid #ebebeb" }}>
+                <TaskList taskGroups={taskGroups} onToggleTask={onToggle} onAddGroup={onAdd} onRemoveGroup={onRemove} remainingBreakdowns={remBd} />
+              </div>
+            </div>
+          )}
+
+          {activePage === "history" && (
+            <div style={{ maxWidth: 700, margin: "0 auto" }}>
+              <h1 style={{ fontSize: 26, fontWeight: 600, marginBottom: 4 }}>History</h1>
+              <p style={{ color: "#9a9a90", fontSize: 14, marginBottom: 32 }}>Your work sessions over time</p>
+              {sessions.length === 0 ? (
+                <div style={{ textAlign: "center" as const, padding: "60px 0", color: "#c4c4be" }}>
