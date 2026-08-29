@@ -70,3 +70,21 @@ function Sparkline({ color, seed = 0 }: { color: string; seed?: number }) {
     </svg>
   );
 }
+
+const Star = ({ className = "w-4 h-4", style }: { className?: string; style?: React.CSSProperties }) => (
+  <svg viewBox="0 0 48 48" fill="currentColor" className={className} style={style}>
+    <path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z" />
+  </svg>
+);
+
+export default function DashboardPage() {
+  const [activePage, setActivePage] = useState("dashboard");
+  const [taskGroups, setTaskGroups] = useState<TaskGroup[]>([]);
+  const [sessions, setSessions] = useState<WorkSession[]>([]);
+  const [todaySessions, setTodaySessions] = useState<WorkSession[]>([]);
+  const [nudges, setNudges] = useState<Nudge[]>([]);
+  const [timerSettings, setTimerSettingsState] = useState<TimerSettings>({ workMinutes: 25, breakMinutes: 5 });
+  const [streak, setStreak] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  const [now, setNow] = useState(new Date());
+  const [period, setPeriod] = useState<"Week" | "Month" | "Year">("Week");
