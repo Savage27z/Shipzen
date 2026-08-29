@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import TiunProvider from "@/components/TiunProvider";
 
 export const metadata: Metadata = {
   title: "ShipZen — Ship Without Burning Out",
@@ -22,7 +23,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <TiunProvider>{children}</TiunProvider>
+      </body>
     </html>
   );
 }

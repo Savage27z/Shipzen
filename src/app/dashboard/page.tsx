@@ -11,7 +11,8 @@ import {
   getBreakdownCount, incrementBreakdownCount,
   getStreak, recordActivity,
 } from "@/lib/storage";
-import { isPro, TIERS, trackEvent } from "@/lib/tiun";
+import { TIERS, trackEvent } from "@/lib/tiun";
+import { useTiun } from "@/components/TiunProvider";
 import TaskList from "@/components/TaskList";
 import AINudge from "@/components/AINudge";
 
@@ -78,6 +79,7 @@ const Star = ({ className = "w-4 h-4", style }: { className?: string; style?: Re
 );
 
 export default function DashboardPage() {
+  const { user, isAuthenticated, isPro: userIsPro, login: tiunLogin, logout: tiunLogout, upgradeToPro } = useTiun();
   const [activePage, setActivePage] = useState("dashboard");
   const [taskGroups, setTaskGroups] = useState<TaskGroup[]>([]);
   const [sessions, setSessions] = useState<WorkSession[]>([]);
@@ -99,7 +101,7 @@ export default function DashboardPage() {
   const burnout = calculateBurnoutScore(todaySessions, streak);
   const ship = calculateShipScore(taskGroups, todaySessions, burnout, streak);
   const { count: bdc } = getBreakdownCount();
-  const maxBd = isPro() ? TIERS.pro.maxBreakdownsPerDay : TIERS.free.maxBreakdownsPerDay;
+  const maxBd = userIsPro ? TIERS.pro.maxBreakdownsPerDay : TIERS.free.maxBreakdownsPerDay;
   const remBd = maxBd - bdc;
 
   const onSession = useCallback((session: WorkSession) => {
@@ -200,17 +202,34 @@ export default function DashboardPage() {
                     {streak > 0 && <span style={{ marginLeft: 12, color: "#2bc4a8", fontWeight: 500 }}>🔥 {streak} day streak</span>}
                   </p>
                 </div>
-                <div style={{ display: "flex", gap: 0, background: "#ffffff", borderRadius: 12, padding: 4, border: "1px solid #ebebeb" }}>
-                  {(["Week", "Month", "Year"] as const).map(p => (
-                    <button key={p} onClick={() => setPeriod(p)} style={{
-                      padding: "7px 18px", borderRadius: 9, fontSize: 13, fontWeight: 500, border: "none", cursor: "pointer",
-                      background: period === p ? "#2bc4a8" : "transparent",
-                      color: period === p ? "#fff" : "#9a9a90",
-                      transition: "all 0.2s",
+                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                  <div style={{ display: "flex", gap: 0, background: "#ffffff", borderRadius: 12, padding: 4, border: "1px solid #ebebeb" }}>
+                    {(["Week", "Month", "Year"] as const).map(p => (
+                      <button key={p} onClick={() => setPeriod(p)} style={{
+                        padding: "7px 18px", borderRadius: 9, fontSize: 13, fontWeight: 500, border: "none", cursor: "pointer",
+                        background: period === p ? "#2bc4a8" : "transparent",
+                        color: period === p ? "#fff" : "#9a9a90",
+                        transition: "all 0.2s",
+                      }}>
+                        {p}
+                      </button>
+                    ))}
+                  </div>
+                  {isAuthenticated && user ? (
+                    <button onClick={tiunLogout} title={`Logged in as ${user.email}`} style={{
+                      width: 36, height: 36, borderRadius: "50%", background: "#2bc4a8", color: "#fff",
+                      border: "none", cursor: "pointer", fontSize: 14, fontWeight: 600, display: "flex", alignItems: "center", justifyContent: "center",
                     }}>
-                      {p}
+                      {user.email[0].toUpperCase()}
                     </button>
-                  ))}
+                  ) : (
+                    <button onClick={tiunLogin} style={{
+                      padding: "7px 18px", borderRadius: 12, fontSize: 13, fontWeight: 500, border: "1px solid #ebebeb",
+                      cursor: "pointer", background: "#fff", color: "#1a1a1a",
+                    }}>
+                      Sign in
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -349,6 +368,14 @@ export default function DashboardPage() {
                     }}>
                       <Star className="w-4 h-4" /> Get AI Nudge
                     </button>
+                    {!userIsPro && (
+                      <button onClick={upgradeToPro} style={{
+                        width: "100%", padding: "11px 0", borderRadius: 14, fontSize: 14, fontWeight: 500, border: "1px solid #2bc4a8", cursor: "pointer",
+                        background: "transparent", color: "#2bc4a8", display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginTop: 8,
+                      }}>
+                        ✨ Upgrade to Pro
+                      </button>
+                    )}
                     <div style={{ display: "flex", flexDirection: "column", gap: 6, marginTop: 14 }}>
                       {[
                         { label: "Browse all tasks", page: "tasks" },
@@ -437,8 +464,18 @@ export default function DashboardPage() {
                 </div>
                 <div style={{ background: "#fff", borderRadius: 24, padding: "28px 32px", border: "1px solid #ebebeb" }}>
                   <h3 style={{ fontSize: 15, fontWeight: 600, margin: "0 0 12px" }}>Plan</h3>
-                  <p style={{ fontSize: 14, color: "#9a9a90", margin: 0 }}>{isPro() ? "Pro — Unlimited" : "Free — 3 breakdowns/day"}</p>
-                  {!isPro() && <button style={{ padding: "10px 24px", background: "#2bc4a8", color: "#fff", border: "none", borderRadius: 50, fontSize: 14, fontWeight: 600, cursor: "pointer", marginTop: 12 }}>Upgrade to Pro</button>}
+                  <p style={{ fontSize: 14, color: "#9a9a90", margin: 0 }}>{userIsPro ? "Pro — Unlimited" : "Free — 3 breakdowns/day"}</p>
+                  {isAuthenticated && user && <p style={{ fontSize: 12, color: "#b0b0a8", margin: "4px 0 0" }}>{user.email}</p>}
+                  {!userIsPro && (
+                    <button onClick={upgradeToPro} style={{ padding: "10px 24px", background: "#2bc4a8", color: "#fff", border: "none", borderRadius: 50, fontSize: 14, fontWeight: 600, cursor: "pointer", marginTop: 12 }}>
+                      Upgrade to Pro — $9/mo
+                    </button>
+                  )}
+                  {!isAuthenticated && (
+                    <button onClick={tiunLogin} style={{ padding: "10px 24px", background: "transparent", color: "#2bc4a8", border: "1px solid #2bc4a8", borderRadius: 50, fontSize: 14, fontWeight: 500, cursor: "pointer", marginTop: 8 }}>
+                      Sign in
+                    </button>
+                  )}
                 </div>
                 <div style={{ background: "#fff", borderRadius: 24, padding: "28px 32px", border: "1px solid #ebebeb" }}>
                   <h3 style={{ fontSize: 15, fontWeight: 600, margin: "0 0 12px" }}>Data</h3>
