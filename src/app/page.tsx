@@ -390,3 +390,31 @@ export default function LandingPage() {
 
   // ── Hero card carousel ────────────────────────────────
   useEffect(() => {
+    const id = setInterval(() => setHeroCardIdx((i) => (i + 1) % HERO_CARDS.length), 3000);
+    return () => clearInterval(id);
+  }, []);
+
+  // ── Scroll helpers ────────────────────────────────────
+  const scrollToEl = useCallback((id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    setTimeout(() => {
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset, behavior: "smooth" });
+    }, 50);
+  }, []);
+
+  const openMenu = () => {
+    setMenuOpen(true);
+    lenisRef.current?.stop();
+    document.documentElement.style.overflow = "hidden";
+  };
+  const closeMenu = () => {
+    setMenuOpen(false);
+    lenisRef.current?.start();
+    document.documentElement.style.removeProperty("overflow");
+  };
+  const openModal = () => {
+    setModalOpen(true);
+    setModalSuccess(false);
+    lenisRef.current?.stop();
+    document.documentElement.style.overflow = "hidden";
