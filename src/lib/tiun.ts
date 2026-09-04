@@ -12,7 +12,7 @@ export const TIERS = {
   pro: {
     maxBreakdownsPerDay: Infinity,
     name: "Pro",
-    priceMonthly: 9,
+    priceMonthly: 1,
   },
 } as const;
 

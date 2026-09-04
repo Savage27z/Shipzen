@@ -470,7 +470,7 @@ export default function DashboardPage() {
                   {isAuthenticated && user && <p style={{ fontSize: 12, color: "#b0b0a8", margin: "4px 0 0" }}>{user.email}</p>}
                   {!userIsPro && (
                     <button onClick={upgradeToPro} style={{ padding: "10px 24px", background: "#2bc4a8", color: "#fff", border: "none", borderRadius: 50, fontSize: 14, fontWeight: 600, cursor: "pointer", marginTop: 12 }}>
-                      Upgrade to Pro — $9/mo
+                      Upgrade to Pro — $1/mo
                     </button>
                   )}
                   {!isAuthenticated && (
