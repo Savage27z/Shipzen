@@ -6,6 +6,24 @@ export const metadata: Metadata = {
   title: "ShipZen — Ship Without Burning Out",
   description:
     "Developer productivity + wellness dashboard. Break down tasks with AI, track focus sessions, and prevent burnout.",
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
+  openGraph: {
+    title: "ShipZen — Ship Without Burning Out",
+    description:
+      "Developer productivity + wellness dashboard. AI task breakdown, Pomodoro timer, burnout detection, and Ship Score.",
+    url: "https://shipzen.vercel.app",
+    siteName: "ShipZen",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "ShipZen — Ship Without Burning Out",
+    description:
+      "AI task breakdown, Pomodoro timer, burnout detection & Ship Score for developers.",
+  },
 };
 
 export const viewport: Viewport = {
